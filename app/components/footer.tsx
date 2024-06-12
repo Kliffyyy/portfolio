@@ -18,7 +18,7 @@ function ArrowIcon() {
 export default function Footer() {
   return (
     <footer className="mb-16 flex-row mt-8">
-      <h3>Student | Engineer | Coder</h3>
+      <h3 className="font-bold">Student | Engineer | Coder?</h3>
       <ul className="font-sm mt-2 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
         <li>
           <a

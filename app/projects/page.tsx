@@ -2,7 +2,7 @@ import { Pages } from "../components/pages";
 
 export const metadata = {
   title: 'Projects',
-  description: 'Nothing here yet!',
+  description: 'All the projects that I are significant...',
 }
 
 export default function Page() {
