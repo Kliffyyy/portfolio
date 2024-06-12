@@ -1,4 +1,3 @@
-import { title } from 'process'
 import { Pages } from "../components/pages";
 
 export const metadata = {
@@ -8,9 +7,9 @@ export const metadata = {
 
 export default function Page() {
   return (
-<section className="w-full max-w-xl px-4 md:px-0">
-  <h1 className="font-semibold text-2xl mb-8 tracking-tighter">{metadata.title}</h1>  
-  <Pages />
-</section>
+    <section className="w-full max-w-xl px-0 md:px-0">
+      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">{metadata.title}</h1>  
+      <Pages />
+    </section>
   )
 }

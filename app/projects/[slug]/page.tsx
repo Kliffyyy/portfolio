@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }) {
+export function generateMetadata({ params }: any) {
   let page = getPages().find((page) => page.slug === params.slug)
   if (!page) {
     return {}
@@ -49,13 +49,14 @@ export function generateMetadata({ params }) {
   }
 }
 
-export default function Page({ params }) {
+export default function Page({ params }: any) {
   let page = getPages().find((page) => page.slug === params.slug)
 
+  // 404 PAGE NOT FOUND 
   if (!page) {
     notFound()
   }
-
+  
   return (
     <section>
       <script

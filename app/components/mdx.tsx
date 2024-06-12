@@ -2,11 +2,12 @@ import Link from 'next/link'
 import Image, { ImageLoader } from 'next/image'
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import { highlight } from 'sugar-high'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { UrlObject } from 'url'
 import { StaticImport, PlaceholderValue, OnLoadingComplete } from 'next/dist/shared/lib/get-img-props'
+import { MDXProvider } from '@mdx-js/react'
 
-function Table({ data }:{data:any}) {
+function Table({ data }:any) {
   let headers = data.headers.map((header: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined, index: React.Key | null | undefined) => (
     <th key={index}>{header}</th>
   ))
@@ -31,7 +32,8 @@ function Table({ data }:{data:any}) {
 function CustomLink(props: (React.JSX.IntrinsicAttributes & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof { href: string | UrlObject; as?: (string | UrlObject) | undefined; replace?: boolean | undefined; scroll?: boolean | undefined; shallow?: boolean | undefined; passHref?: boolean | undefined; prefetch?: boolean | undefined; locale?: string | false | undefined; legacyBehavior?: boolean | undefined; onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement> | undefined; onTouchStart?: React.TouchEventHandler<HTMLAnchorElement> | undefined; onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined }> & { href: string | UrlObject; as?: (string | UrlObject) | undefined; replace?: boolean | undefined; scroll?: boolean | undefined; shallow?: boolean | undefined; passHref?: boolean | undefined; prefetch?: boolean | undefined; locale?: string | false | undefined; legacyBehavior?: boolean | undefined; onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement> | undefined; onTouchStart?: React.TouchEventHandler<HTMLAnchorElement> | undefined; onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined } & { children?: React.ReactNode } & React.RefAttributes<HTMLAnchorElement>) | (React.JSX.IntrinsicAttributes & React.ClassAttributes<HTMLAnchorElement> & React.AnchorHTMLAttributes<HTMLAnchorElement>)) {
   let href = props.href
 
-  if (href?.toString().charAt(0) == "/") {
+  // if (href?.toString().charAt(0) == "/") {
+  if (href?.toString().startsWith("/")) {
     return (
       <Link href={href} {...props}>
         {props.children}
@@ -39,23 +41,28 @@ function CustomLink(props: (React.JSX.IntrinsicAttributes & Omit<React.AnchorHTM
     )
   }
 
-  if (href?.toString().charAt(0) == "#") {
-    return <a {...props} />
+  // if (href?.toString().charAt(0) == "#") {
+  if (href?.toString().startsWith("#")) {
+    // return <a {...props} />
+    return React.createElement('a', {...props})
   }
 
-  return <a target="_blank" rel="noopener noreferrer" {...props} />
+  // return <a target="_blank" rel="noopener noreferrer" {...props} />
+  return React.createElement('a', {target:"_blank" , rel: "noopener noreferrer" , ...props})
 }
 
 function RoundedImage(props: React.JSX.IntrinsicAttributes & Omit<React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "alt" | "ref" | "height" | "width" | "loading" | "src" | "srcSet"> & { src: string | StaticImport; alt: string; width?: number | `${number}` | undefined; height?: number | `${number}` | undefined; fill?: boolean | undefined; loader?: ImageLoader | undefined; quality?: number | `${number}` | undefined; priority?: boolean | undefined; loading?: "eager" | "lazy" | undefined; placeholder?: PlaceholderValue | undefined; blurDataURL?: string | undefined; unoptimized?: boolean | undefined; overrideSrc?: string | undefined; onLoadingComplete?: OnLoadingComplete | undefined; layout?: string | undefined; objectFit?: string | undefined; objectPosition?: string | undefined; lazyBoundary?: string | undefined; lazyRoot?: string | undefined } & React.RefAttributes<HTMLImageElement | null>) {
-  return <Image alt={props.alt} className="rounded-lg" {...props} />
+  // return <Image alt={props.alt} className="rounded-lg" {...props} />
+  // return React.createElement('Image', {alt={props.alt} , className:"rounded-lg" , ...props})
+  return React.createElement('Image', {className:"rounded-lg" , ...props})
 }
 
-function Code({ children, ...props }) {
+function Code({ children, ...props }: any) {
   let codeHTML = highlight(children)
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
 }
 
-function slugify(str: { toString: () => string }) {
+function simplify(str: { toString: () => string }) {
   return str
     .toString()
     .toLowerCase()
@@ -67,9 +74,10 @@ function slugify(str: { toString: () => string }) {
 }
 
 function createHeading(level: number) {
-  const Heading = ({ children }) => {
-    let slug = slugify(children)
-    return React.createElement(
+  const Heading = ({ children }: any) => {
+    let slug = simplify(children)
+
+    return (React.createElement(
       `h${level}`,
       { id: slug },
       [
@@ -80,13 +88,14 @@ function createHeading(level: number) {
         }),
       ],
       children
-    )
+    ));
   }
 
   Heading.displayName = `Heading${level}`
 
   return Heading
 }
+
 
 let components = {
   h1: createHeading(1),
@@ -105,7 +114,7 @@ export function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemoteProps)
   return (
     <MDXRemote
       {...props}
-      components={{ ...components, ...(props.components || {}) }}
+      components={{ ...components, ...(props.components || {})}}
     />
   )
 }
