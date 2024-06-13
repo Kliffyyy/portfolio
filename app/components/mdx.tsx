@@ -30,10 +30,6 @@ function Table({ data }:any) {
 }
 
 function CustomLink(props: (React.JSX.IntrinsicAttributes & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof { href: string | UrlObject; as?: (string | UrlObject) | undefined; replace?: boolean | undefined; scroll?: boolean | undefined; shallow?: boolean | undefined; passHref?: boolean | undefined; prefetch?: boolean | undefined; locale?: string | false | undefined; legacyBehavior?: boolean | undefined; onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement> | undefined; onTouchStart?: React.TouchEventHandler<HTMLAnchorElement> | undefined; onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined }> & { href: string | UrlObject; as?: (string | UrlObject) | undefined; replace?: boolean | undefined; scroll?: boolean | undefined; shallow?: boolean | undefined; passHref?: boolean | undefined; prefetch?: boolean | undefined; locale?: string | false | undefined; legacyBehavior?: boolean | undefined; onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement> | undefined; onTouchStart?: React.TouchEventHandler<HTMLAnchorElement> | undefined; onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined } & { children?: React.ReactNode } & React.RefAttributes<HTMLAnchorElement>) | (React.JSX.IntrinsicAttributes & React.ClassAttributes<HTMLAnchorElement> & React.AnchorHTMLAttributes<HTMLAnchorElement>)) {
-  const handleClick = (event: any) => {
-    handleAnchorClick(event); // Call the anchor click handler
-  };
-  
   let href = props.href
 
   // if (href?.toString().charAt(0) == "/") {
@@ -48,33 +44,11 @@ function CustomLink(props: (React.JSX.IntrinsicAttributes & Omit<React.AnchorHTM
   // if (href?.toString().charAt(0) == "#") {
   if (href?.toString().startsWith("#")) {
     // return <a {...props} />
-    return React.createElement('a', {...props, handleClick, className: 'scroll-mt-4'})
+    return React.createElement('a', {...props})
   }
 
   // return <a target="_blank" rel="noopener noreferrer" {...props} />
   return React.createElement('a', {target:"_blank" , rel: "noopener noreferrer" , ...props})
-}
-
-// might not need this
-function handleAnchorClick(event:any) {
-  if (event.currentTarget.hash !== '#') {
-    event.preventDefault();
-    const targetId = event.currentTarget.hash.substring(1);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      const headerOffset = -100; // Adjust this value to match your fixed header height
-      const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-
-      // Update the URL hash without jumping to the anchor
-      window.history.pushState(null, '', event.currentTarget.hash);
-    }
-  }
 }
 
 function RoundedImage(props: React.JSX.IntrinsicAttributes & Omit<React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "alt" | "ref" | "height" | "width" | "loading" | "src" | "srcSet"> & { src: string | StaticImport; alt: string; width?: number | `${number}` | undefined; height?: number | `${number}` | undefined; fill?: boolean | undefined; loader?: ImageLoader | undefined; quality?: number | `${number}` | undefined; priority?: boolean | undefined; loading?: "eager" | "lazy" | undefined; placeholder?: PlaceholderValue | undefined; blurDataURL?: string | undefined; unoptimized?: boolean | undefined; overrideSrc?: string | undefined; onLoadingComplete?: OnLoadingComplete | undefined; layout?: string | undefined; objectFit?: string | undefined; objectPosition?: string | undefined; lazyBoundary?: string | undefined; lazyRoot?: string | undefined } & React.RefAttributes<HTMLImageElement | null>) {
