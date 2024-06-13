@@ -6,11 +6,13 @@
 html {
   min-width: 360px;
   color-scheme: dark;
+  @apply transition-all;
+  scroll-behavior: smooth;
 }
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
 
   --sh-class: #2d5e9d;
@@ -42,15 +44,11 @@ html {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-start-rgb));
 
   align-items: left;
   align-content: center;
+  justify-content: center;
 }
 
 table {
@@ -77,32 +75,31 @@ table {
 }
 
 /* Browser Scrollbars */
-pre::-webkit-scrollbar {
-  display: none;              /* Safari/Orion */
+body::-webkit-scrollbar {
+  display: none;
 }
 
-pre {
+body {
   -ms-overflow-style: none;   /* IE and Edge */
   scrollbar-width: none;      /* Firefox */
+  transition: all;
+  transition-duration: 400ms;
 }
 
 
 .prose .anchor {
-  @apply absolute invisible no-underline;
+  @apply absolute invisible no-underline scroll-mt-4;
 
   margin-left: -1em;
   padding-right: 0.5em;
   width: 80%;
   max-width: 700px;
   cursor: pointer;
+  scroll-snap-type: proximity;
 }
 
 .anchor:hover {
   @apply visible;
-}
-
-.prose a {
-  @apply underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
 }
 
 .prose .anchor:after {
@@ -112,6 +109,10 @@ pre {
 
 .prose *:hover > .anchor {
   @apply visible;
+}
+
+.prose a {
+  @apply underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
 }
 
 .prose pre {
@@ -130,11 +131,6 @@ pre {
 
 .prose code span {
   @apply font-medium;
-}
-
-.prose img {
-  /* Don't apply styles to next/image */
-  @apply m-0;
 }
 
 .prose p {
@@ -168,3 +164,43 @@ pre {
 .prose ol {
   @apply list-decimal pl-6;
 }
+
+/* Images */
+.prose img {
+  /* Don't apply styles to next/image */
+  @apply mx-0 rounded-lg;
+  @apply mt-2 flex-col space-x-0 space-y-2 md:flex-row ;
+  @apply md:space-x-4 md:space-y-0;
+  transition: all 0.5s;
+}
+
+img[alt=img-small]  { width: 8em; }
+img[alt=img-med]    { width: 15em; }
+img[alt=img-large]  { width: 30em; }
+img[alt=img-fill]   { width: 100%; }
+
+
+/* intro */
+.prose .intro{
+  @apply flex items-center justify-center gap-0 p-10;
+  @apply flex-col;
+  transition: flex-direction 0.5s;
+}
+
+.prose .text-content {
+  @apply flex flex-col justify-center items-end text-right;
+  transition: all 0.5s;
+}
+
+@media (min-width: 600px) {
+  .prose {
+    @apply flex-row;
+  }
+
+  .prose .text-content {
+    @apply items-center text-center;
+  }
+}
+
+
+/* flex flex-col shrink md:flex-row md:space-x-4 md:space-y-0 text-neutral-600 dark:text-neutral-300 */

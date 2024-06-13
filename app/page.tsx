@@ -1,22 +1,22 @@
-import Image from "next/image";
 import { CustomMDX } from "./components/mdx";
+import Introduction from "./components/intro";
 
-
-const mainHeading = 'Klifton Cheng';
-const description = `I'm a student who enjoys`;
+const title = 'Klifton Cheng';
 
 const mdxContent = `
-> ${description}
+this is a placeholder image?
+---
+---
+**:description here:**
 
 ---
-## Heading 2
 
-[The Encore Keyboard](https://www.youtube.com/watch?v=FLdCY4pKNV0)
-![christmas](./documents/images/personal/christmas.jpeg)
 \`\`\`js
 console.log('Hello, world!');
 \`\`\`
 `;
+
+// ![align-right](/documents/images/personal/christmas.jpeg)
  
 
 export default function Home() {
@@ -24,12 +24,11 @@ export default function Home() {
     <section className="w-full max-w-xl px-0 md:px-0">
 
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        {mainHeading}
+        {title}
       </h1>
-
+      <Introduction />
       <article className="prose">
         <CustomMDX source={mdxContent} />
-        <img src={"/documents/images/personal/christmas.jpeg"} alt="image" width={700} height={700}/>
       </article>
     </section>
 );

@@ -29,8 +29,8 @@ const items = {
 export default function Footer() {
   return (
     <footer className="mb-16 flex-row mt-8">
-      <h3 className="font-bold">Student | Engineer | Coder?</h3>
-      <div className="font-sm mt-2 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
+      <code className="font-bold opacity-80">Student | Engineer | Coder?</code>
+      <div className="font-sm mt-2 flex flex-col shrink space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
       {Object.entries(items).map(([path, { name }]) => {
         return (
             <a
