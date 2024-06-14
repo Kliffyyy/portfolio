@@ -1,8 +1,8 @@
 import { CustomMDX } from "./mdx"
 
 
-const subtitle = `part Engineer, part Developer`
-const description = `Ambitions, what I like, most important qualification`
+const subtitle = `Part Engineer, Part Developer`
+const description = `This is a description of `
 
 const mdxContent = `
 #### ${subtitle}

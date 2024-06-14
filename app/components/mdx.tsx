@@ -6,6 +6,7 @@ import React, { ReactNode } from 'react'
 import { UrlObject } from 'url'
 import { StaticImport, PlaceholderValue, OnLoadingComplete } from 'next/dist/shared/lib/get-img-props'
 import { Content } from 'next/font/google'
+import { LargeCard } from './card'
 
 function Table({ data }:any) {
   let headers = data.headers.map((header: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined, index: React.Key | null | undefined) => (
@@ -96,7 +97,7 @@ function createHeading(level: number) {
 }
 
 
-let components = {
+export let components = {
   h1: createHeading(1),
   h2: createHeading(2),
   h3: createHeading(3),
