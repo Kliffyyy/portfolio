@@ -11,14 +11,10 @@ ${description}
 
 export default function Introduction() {
   return (
-    //   <div className="intro">
-    //     <p>
-    //         hi there
-    //     </p>
-    //     <img src='/documents/images/personal/christmas.jpeg' className=''/>
-    //   </div>
-    <div className="prose intro text-content">
+    <div className="prose intro">
+      <div className=" text-content">
         <CustomMDX source={mdxContent} />
+      </div>
         <img src="/documents/images/personal/christmas.jpeg" alt="Profile Picture" className="prose"/>
     </div>
     )

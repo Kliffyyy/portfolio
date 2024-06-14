@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <section className="w-full max-w-xl px-0 md:px-0">
 
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
+      <h1 className="titles">
         {title}
       </h1>
       <Introduction />
