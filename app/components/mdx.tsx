@@ -6,30 +6,56 @@ import React, { ReactNode } from 'react'
 import { UrlObject } from 'url'
 import { StaticImport, PlaceholderValue, OnLoadingComplete } from 'next/dist/shared/lib/get-img-props'
 import { Content } from 'next/font/google'
-import { LargeCard } from './card'
 
-function Table({ data }:any) {
-  let headers = data.headers.map((header: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined, index: React.Key | null | undefined) => (
+// markdown tables
+const parseMarkdownTable = (markdownTable: string) => {
+  if (!markdownTable) return { headers: [], rows: [] };
+
+  const lines = markdownTable.trim().split('\n');
+  if (lines.length < 2) return { headers: [], rows: [] };
+
+  const headers = lines[0].split('|').map(header => header.trim()).filter(Boolean);
+  const rows = lines.slice(2).map(line => 
+    line.split('|').map(cell => cell.trim()).filter(Boolean)
+  );
+
+  return { headers, rows };
+};
+
+let Table = ({ markdownTable }:any) => {
+  if (!markdownTable) {
+    return <div>Error: No table data provided.</div>;
+  }
+
+  const data = parseMarkdownTable(markdownTable);
+
+  if (data.headers.length === 0 || data.rows.length === 0) {
+    return <div>Error: Invalid table format.</div>;
+  }
+
+  const headers = data.headers.map((header, index) => (
     <th key={index}>{header}</th>
-  ))
-  let rows = data.rows.map((row: any[], index: React.Key | null | undefined) => (
+  ));
+
+  const rows = data.rows.map((row, index) => (
     <tr key={index}>
-      {row.map((cell: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined, cellIndex: React.Key | null | undefined) => (
+      {row.map((cell, cellIndex) => (
         <td key={cellIndex}>{cell}</td>
       ))}
     </tr>
-  ))
+  ));
 
   return (
-    <table>
+    <table className='table'>
       <thead>
         <tr>{headers}</tr>
       </thead>
       <tbody>{rows}</tbody>
     </table>
-  )
-}
+  );
+};
 
+// custom links
 function CustomLink(props: (React.JSX.IntrinsicAttributes & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof { href: string | UrlObject; as?: (string | UrlObject) | undefined; replace?: boolean | undefined; scroll?: boolean | undefined; shallow?: boolean | undefined; passHref?: boolean | undefined; prefetch?: boolean | undefined; locale?: string | false | undefined; legacyBehavior?: boolean | undefined; onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement> | undefined; onTouchStart?: React.TouchEventHandler<HTMLAnchorElement> | undefined; onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined }> & { href: string | UrlObject; as?: (string | UrlObject) | undefined; replace?: boolean | undefined; scroll?: boolean | undefined; shallow?: boolean | undefined; passHref?: boolean | undefined; prefetch?: boolean | undefined; locale?: string | false | undefined; legacyBehavior?: boolean | undefined; onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement> | undefined; onTouchStart?: React.TouchEventHandler<HTMLAnchorElement> | undefined; onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined } & { children?: React.ReactNode } & React.RefAttributes<HTMLAnchorElement>) | (React.JSX.IntrinsicAttributes & React.ClassAttributes<HTMLAnchorElement> & React.AnchorHTMLAttributes<HTMLAnchorElement>)) {
   let href = props.href
 
@@ -96,6 +122,23 @@ function createHeading(level: number) {
   return Heading
 }
 
+// cards
+
+
+const Card = ({ cardContent = {} }:any) => {
+  const { title, description, imageUrl } = cardContent;
+
+  return (
+    <div className="card">
+      {imageUrl && <img src={imageUrl} alt={title || 'Card Image'} className="prose card-image" />}
+      <div className="card-content">
+        {title && <h2 className="card-title">{title}</h2>}
+        {description && <p className="card-text">{description}</p>}
+      </div>
+    </div>
+  );
+};
+
 
 export let components = {
   h1: createHeading(1),
@@ -104,10 +147,15 @@ export let components = {
   h4: createHeading(4),
   h5: createHeading(5),
   h6: createHeading(6),
+
+  /// Add other custom components here
+  // within mdx
   Image: RoundedImage,
   a: CustomLink,
   code: Code,
-  Table,
+  // call with <element />
+  Table: Table,
+  Card: Card,
 }
 
 export function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemoteProps) {

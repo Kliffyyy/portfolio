@@ -12,10 +12,10 @@ ${description}
 export default function Introduction() {
   return (
     <div className="prose intro">
-      <div className=" text-content">
+      <div className="text-content">
         <CustomMDX source={mdxContent} />
       </div>
-        <img src="/documents/images/personal/christmas.jpeg" alt="Profile Picture" className="prose"/>
+        <img src="/documents/images/personal/christmas.jpeg" alt="Profile Picture" className="img"/>
     </div>
     )
 }
