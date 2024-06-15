@@ -25,6 +25,8 @@ html {
   --sh-property: #e25a1c;
   --sh-entity: #e25a1c;
 }
+
+
 /* --------------- DARK MODE --------------- */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -67,8 +69,12 @@ body {
   margin-bottom: 1.25em !important;
 }
 
+
 /* --------------- BROWSER SCROLLBARS --------------- */
-body::-webkit-scrollbar {
+html::-webkit-scrollbar {
+  display: none;
+}
+table::-webkit-scrollbar {
   display: none;
 }
 
@@ -79,8 +85,8 @@ body {
   transition-duration: 400ms;
 }
 
-/* --------------- CUSTOM LINK --------------- */
 
+/* --------------- CUSTOM LINK --------------- */
 .prose .anchor {
   @apply absolute invisible no-underline scroll-mt-4;
 
@@ -159,6 +165,7 @@ body {
   @apply list-decimal pl-6;
 }
 
+
 /** --------------- INTRODUCTION --------------- **/
 /* Images */
 .intro img {
@@ -192,6 +199,7 @@ body {
   @apply justify-between;
 }
 
+
 /** --------------- TABLE --------------- */
 
 .table th, .table td {
@@ -214,23 +222,15 @@ body {
   border-collapse: collapse;
   border: 1px solid rgba(var(--foreground-rgb), 0.2);
   border-radius: 10px;
-  
 }
+
 
 /** --------------- CARDS --------------- */
-
-.card-large {
-  @apply rounded-lg p-4;
-  transition: all 300ms;
-  /* color: rgb(var(--foreground-rgb)); */
-}
-
 .card {
   @apply flex flex-col rounded-lg my-3;
   transition: all 300ms;
   /* border: 1px solid #ccc; */
   /* border-radius: 8px; */
-  box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
   /* overflow: hidden; */
   /* margin: 16px; */
   /* font-family: Arial, sans-serif; */
@@ -238,24 +238,57 @@ body {
 
 .card-image {
   @apply rounded-lg;
+  box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
 }
-
 
 .card-content {
   margin-top: -30px;
 }
 
-/* .card-title {
-  font-size: 1.5em;
-  margin: 0px;
-} */
 
-/* .card-text {
-  margin: 0;
-} */
+/** --------------- BANNER --------------- */
+.banner {
+  @apply flex flex-col rounded-lg my-3;
+  transition: all 300ms;
+  position: relative;  /* Ensures child elements are positioned relative to this container */
+  /* border-radius: 8px; */
+  /* font-family: Arial, sans-serif; */
+}
+
+.banner-glass {
+  /* blur effect */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(7px);
+  -moz-backdrop-filter: blur(7px);
 
 
-/* when screen is large */
+  background-color: rgba(var(--background-start-rgb), 0.3);
+  border-radius: 4px;
+  position: absolute;
+  --glass-offset: 4px; /* Adjust the offset */
+  bottom: var(--glass-offset);  /* Adjust vertical position */
+  left: var(--glass-offset);    /* Adjust horizontal position */
+  /* width: calc(100% - 2*var(--glass-offset));  */
+  /* box-sizing: content-box; Ensure padding is included in width calculation */
+}
+
+
+.banner-text {
+  @apply  px-2 ;
+  text-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.6);
+  font-size: small;
+  font-family: monospace;
+  font-weight: lighter;
+}
+.banner img {
+  @apply rounded-lg;
+  max-height: 260px;
+  object-fit: cover;
+  box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
+}
+
+
+/** --------------- WHEN THE SCREEN IS LARGE --------------- */
 @media (min-width: 600px) {
   .intro {
     @apply flex flex-row;

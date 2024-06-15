@@ -122,9 +122,7 @@ function createHeading(level: number) {
   return Heading
 }
 
-// cards
-
-
+// card component
 const Card = ({ cardContent = {} }:any) => {
   const { title, description, imageUrl } = cardContent;
 
@@ -134,6 +132,22 @@ const Card = ({ cardContent = {} }:any) => {
       <div className="card-content">
         {title && <h2 className="card-title">{title}</h2>}
         {description && <p className="card-text">{description}</p>}
+      </div>
+    </div>
+  );
+};
+
+// banner component
+const Banner = ({ BannerContent = {} }:any) => {
+  const { text, imageUrl } = BannerContent;
+
+  return (
+    <div className="banner">
+      <img src={imageUrl} alt={text ?? 'Banner Image'} className="img"/>
+      <div className="banner-glass">
+        {<div className="banner-text">
+          {text}
+        </div> ?? ""}
       </div>
     </div>
   );
@@ -156,6 +170,7 @@ export let components = {
   // call with <element />
   Table: Table,
   Card: Card,
+  Banner: Banner,
 }
 
 export function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemoteProps) {
