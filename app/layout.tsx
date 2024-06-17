@@ -14,7 +14,7 @@ export default function RootLayout(
   {children} : Readonly<{ children: React.ReactNode; }> 
 ) {
   return (
-    <html lang="en" className="px-8 antialiased max-w-2xl mt-8 lg:mx-auto duration-300 scroll-py-5">
+    <html lang="en" className="px-4 antialiased max-w-2xl mt-8 lg:mx-auto duration-300 scroll-py-5">
       <body className="transition-all">
         <Navbar />
         {children}
