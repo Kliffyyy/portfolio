@@ -1,18 +1,20 @@
 import { notFound } from 'next/navigation'
 import { CustomMDX } from '../../components/mdx'
 import { formatDate, getPages } from '../../components/utils'
-import { baseUrl } from '../../components/sitemap'
+import { baseUrl, PagesRootDirectory } from '../../components/sitemap'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 export async function generateStaticParams() {
-  let pages = getPages()
+  let pages = await getPages()
 
-  return pages.map((page) => ({
+  return pages.map((page: { slug: any }) => ({
     slug: page.slug,
   }))
 }
 
-export function generateMetadata({ params }: any) {
-  let page = getPages().find((page) => page.slug === params.slug)
+export async function generateMetadata({ params }: any) {
+  let pages = await getPages()
+  let page = pages.find((page: { slug: any }) => page.slug === params.slug)
   if (!page) {
     return {}
   }
@@ -21,7 +23,7 @@ export function generateMetadata({ params }: any) {
     title,
     publishedAt: publishedTime,
     summary: description,
-    image:image,
+    image: image,
   } = page.metadata
   let ogImage = image ? image : `${baseUrl}/og?title=${encodeURIComponent(title)}`
 
@@ -33,7 +35,7 @@ export function generateMetadata({ params }: any) {
       description,
       type: 'article',
       publishedTime,
-      url: `${baseUrl}/pages/${page.slug}`,
+      url: `${baseUrl}/${PagesRootDirectory}/${page.slug}`,
       images: [
         {
           url: ogImage,
@@ -49,8 +51,10 @@ export function generateMetadata({ params }: any) {
   }
 }
 
-export default function Page({ params }: any) {
-  let page = getPages().find((page) => page.slug === params.slug)
+
+export default async function Page({ params }: any) {
+  let pages = await getPages()
+  let page = pages.find((page: { slug: any }) => page.slug === params.slug)
 
   // 404 PAGE NOT FOUND 
   if (!page) {
@@ -64,8 +68,8 @@ export default function Page({ params }: any) {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            // '@context': 'https://schema.org',
-            // '@type': 'BlogPosting',
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
             headline: page.metadata.title,
             datePublished: page.metadata.publishedAt,
             dateModified: page.metadata.publishedAt,
@@ -73,7 +77,7 @@ export default function Page({ params }: any) {
             image: page.metadata.image
               ? `${baseUrl}${page.metadata.image}`
               : `/og?title=${encodeURIComponent(page.metadata.title)}`,
-            url: `${baseUrl}/projects/${page.slug}`,
+            url: `${baseUrl}/${PagesRootDirectory}/${page.slug}`,
             author: {
               '@type': 'Person',
               name: 'My Portfolio',
@@ -85,9 +89,9 @@ export default function Page({ params }: any) {
         {page.metadata.title}
       </p>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        {/* <p className="text-sm text-neutral-600 dark:text-neutral-400">
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(page.metadata.publishedAt)}
-        </p> */}
+        </p>
       </div>
       <article className="prose">
         <CustomMDX source={page.content} />

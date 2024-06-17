@@ -1,4 +1,4 @@
-import { CustomMDX, Banner, Card} from "./components/mdx";
+import { CustomMDX, Banner, Card, SmallCard} from "./components/mdx";
 import Introduction from "./components/intro";
 
 const title = `Hi, I am Klifton`;
@@ -74,9 +74,14 @@ export default function Home() {
         Fusion360 | DaVinci Resolve | Git | Slicer Software's | IDE's
         `,
       }} />
+            <SmallCard cardContent={{
+        title: "Swift",
+        imageUrl: "/documents/icons/swift.svg",
+        link: "/pages/portfolio",
+      }} />
       
       <article className="prose">
-        <CustomMDX source={mdxContent} />
+        <CustomMDX source={ "# What Have I done"} />   {/* Achievements Title */}
       </article>
 
     </section>

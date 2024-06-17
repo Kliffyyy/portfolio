@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { PagesRootDirectory } from './sitemap'
 
 type Metadata = {
   title: string
@@ -49,8 +50,46 @@ function getMDXData(dir: string) {
   })
 }
 
-export function getPages() {
-  return getMDXData(path.join(process.cwd(), 'app', 'projects', 'pages'))
+async function getAllFilePathsRecursively(dir:any, fileType:any) {
+  let filePaths:any = [];
+  const list = await fs.promises.readdir(dir);
+
+  for (const file of list) {
+    const filePath = path.resolve(dir, file);
+    const stat = await fs.promises.stat(filePath);
+
+    if (stat && stat.isDirectory()) {
+      const res = await getAllFilePathsRecursively(filePath, fileType);
+      filePaths = filePaths.concat(res);
+    } else if (path.extname(file) === fileType) {
+      filePaths.push(filePath);
+    }
+  }
+
+  return filePaths;
+}
+
+export async function getPages() {
+  const rootDir = `app/${PagesRootDirectory}`;
+  const mdxFilePaths = await getAllFilePathsRecursively(rootDir, '.mdx');
+
+  // Process the collected MDX files
+  const pages = mdxFilePaths.map((filePath: string) => {
+    const dir = path.dirname(filePath);
+    const file = path.basename(filePath);
+    const { metadata, content } = readMDXFile(path.join(dir, file));
+    const slug = path.basename(file, path.extname(file));
+
+    return {
+      metadata,
+      slug,
+      content,
+    };
+  });
+
+  return pages;
+  
+  // return getMDXData(path.join(process.cwd(), 'app', `pages`, 'pages'))
 }
 
 export function formatDate(date: string, includeRelative = false) {

@@ -133,7 +133,7 @@ export const Card = ({ cardContent = {} }:any) => {
   */
 
   return (
-    <Link className="card" href={link ?? "/projects"}>
+    <Link className="card" href={link ?? "/pages"}>
       {imageUrl && <img src={imageUrl} alt={title || 'Card Image'} className="prose card-image" />}
       <div className="card-content">
         {<p className="card-title">{title}</p>}
@@ -152,10 +152,10 @@ export const SmallCard = ({ cardContent = {} }:any) => {
   */
 
   return (
-    <Link className="card" href={link ?? "/projects"}>
-      {imageUrl && <img src={imageUrl} alt={title || 'Card Image'} className="prose card-image" />}
+    <Link className="small-card" href={link ?? "/pages"}>
+      {imageUrl && <img src={imageUrl} alt={title || 'Card Icon'} className="prose icon" />}
       <div className="card-content">
-        {<p className="card-title">{title}</p>}
+        {<p className="title">{title}</p>}
       </div>
       
     </Link>
