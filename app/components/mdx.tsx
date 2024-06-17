@@ -6,6 +6,7 @@ import React, { ReactNode } from 'react'
 import { UrlObject } from 'url'
 import { StaticImport, PlaceholderValue, OnLoadingComplete } from 'next/dist/shared/lib/get-img-props'
 import { Content } from 'next/font/google'
+import { prefix } from './github-pages'
 
 
 // custom links
@@ -134,7 +135,7 @@ export const Card = ({ cardContent = {} }:any) => {
 
   return (
     <Link className="card" href={link ?? "/projects"}>
-      {imageUrl && <img src={imageUrl} alt={title || 'Card Image'} className="prose card-image" />}
+      {imageUrl && <img src={prefix.concat(imageUrl)} alt={title || 'Card Image'} className="prose card-image" />}
       <div className="card-content">
         {<p className="card-title">{title}</p>}
         {description && <p className="card-text truncate-text">{description}</p>}
@@ -154,7 +155,7 @@ export const SmallCard = ({ cardContent = {} }:any) => {
 
   return (
     <Link className="card" href={link ?? "/projects"}>
-      {imageUrl && <img src={imageUrl} alt={title || 'Card Image'} className="prose card-image" />}
+      {imageUrl && <img src={prefix.concat(imageUrl)} alt={title || 'Card Image'} className="prose card-image" />}
       <div className="card-content">
         {<p className="card-title">{title}</p>}
       </div>
@@ -169,7 +170,7 @@ export const Banner = ({ BannerContent = {} }:any) => {
 
   return (
     <div className="banner">
-      <img src={imageUrl} alt={text ?? 'Banner Image'} className="img"/>
+      <img src={prefix.concat(imageUrl)} alt={text ?? 'Banner Image'} className="img"/>
       <div className="banner-glass">
         {<div className="banner-text">
           {text}

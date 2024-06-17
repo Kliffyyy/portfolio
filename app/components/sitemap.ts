@@ -1,6 +1,6 @@
 import { getPages } from './utils'
 
-export const baseUrl = 'https://github.com'
+export const baseUrl = 'https://kliffyyy.github.io/'
 
 export default async function sitemap() {
   let pages = getPages().map((page) => ({
