@@ -137,11 +137,10 @@ export const Card = ({ cardContent = {} }:any) => {
       {imageUrl && <img src={imageUrl} alt={title || 'Card Image'} className="prose card-image" />}
       <div className="card-content">
         {<p className="card-title">{title}</p>}
-        {description && <p className="card-text truncate-text">{description}</p>}
+        {description && <p className="truncate-text">{description}</p>}
         <text className='read-more'>Read More</text>
       </div>
-      
-    </Link>
+    </Link >
   );
 };
 

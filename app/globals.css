@@ -106,7 +106,7 @@ body {
 .prose .anchor:after {
   @apply text-neutral-300 dark:text-neutral-700;
   content: '#';
-}
+} 
 
 .prose *:hover > .anchor {
   @apply visible;
@@ -164,6 +164,10 @@ body {
 
 .prose ol {
   @apply list-decimal pl-6;
+}
+
+.prose .card {
+  @apply no-underline;
 }
 
 
@@ -227,7 +231,7 @@ body {
 
 /** --------------- CARDS --------------- */
 .card {
-  @apply flex flex-col rounded-2xl my-5;
+  @apply flex flex-col rounded-2xl my-5 no-underline;
   transition: all 500ms;
   /* max-width: 450px */
   /* border: 1px solid #ccc; */
@@ -254,7 +258,7 @@ body {
 .card-image {
   @apply rounded-xl;
   box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
-  max-height: 20cap;
+  max-height: 16em;
   object-fit: cover;
   object-position: top;
   transition: all 500ms;
@@ -265,16 +269,15 @@ body {
   /* max-height: 120px;
   text-overflow: ellipsis;
   text-wrap:wrap; */
-  backface-visibility: hidden;
 }
 
 .card-title {
+  @apply no-underline;
   @apply text-xl font-semibold;
 }
 
 .truncate-text {
   /* For multiline truncation */
-  /* display: -webkit-box; */
   line-clamp: 3;
   -webkit-line-clamp: 3; /* Number of lines to show */
   -webkit-box-orient: vertical;
