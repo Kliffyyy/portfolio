@@ -1,14 +1,24 @@
-import { CustomMDX, Banner, Card} from "./components/mdx";
-import Introduction from "./components/intro";
+---
+title: 'intro'
+publishedAt: '2024-04-15'
+summary: 'In the ever-evolving landscape of software development, the debate between dynamic and static typing continues to be a hot topic.'
+---
 
-const title = `Hi, I am Klifton`;
-
-const mdxContent = `
-# What have I done?
-
-## Projects
+# Achievements
 
 ## Coding
+<Card cardContent={{
+  title: "My Coding Journey",
+  imageUrl: "/documents/images/personal/christmas.jpeg",
+  link: "/projects/Testing",
+  description: `
+  I am most comfortable with Python and SwiftUI to code out most automations and applications. I learnt C++ when I started using Arduino for more engineering related projects and React when building this website. 
+  I have base knowledge of shell script to navigate in the terminal on linux based systems, mainly MacOS, and within MacOS have dabbled with applescript for automation. 
+  `,
+}} />
+
+I am most comfortable with Python and SwiftUI to code out most automations and applications. I learnt C++ when I started using Arduino for more engineering related projects and React when building this website. 
+I have base knowledge of shell script to navigate in the terminal on linux based systems, mainly MacOS, and within MacOS have dabbled with applescript for automation. 
 
 ## Software
 For coding I use Visual Studio Code for creating scripts and automations. \n
@@ -26,59 +36,3 @@ I also have experience operating a 3D printer and some basic knowledge of operat
 
 # Exeprience
 ## Industry
-
-`;
-
-// ![align-right](/documents/images/personal/christmas.jpeg)
- 
-
-export default function Home() {
-  return (
-    <section className="w-full max-w-xl px-0 md:px-0">
-
-      <Banner BannerContent={{
-        text: "Swift Accelerator Programme",
-        imageUrl: "/documents/images/SAP/empty seats.jpeg"
-      }} />
-
-      <h1 className="titles">
-        {title}
-      </h1>
-
-      <Introduction />
-      <article className="prose">
-        <CustomMDX source={ "# Achievements"} />   {/* Achievements Title */}
-      </article>
-
-      <Card cardContent={{
-        title: "Coding",
-        imageUrl: "/documents/images/personal/christmas.jpeg",
-        link: "/projects/Testing",
-        description: "Python | Swift | C++ | React | Shell Script | Applescript",
-      }} />
-
-      <Card cardContent={{
-        title: "Hardware",
-        imageUrl: "/documents/images/personal/christmas.jpeg",
-        link: "/projects/Testing",
-        description: `
-        Arduino | Raspberry Pi | PSoC | 3D Printing | Laser Cutting
-        `,
-      }} />
-
-      <Card cardContent={{
-        title: "Software",
-        imageUrl: "/documents/images/personal/christmas.jpeg",
-        link: "/projects/Testing",
-        description: `
-        Fusion360 | DaVinci Resolve | Git | Slicer Software's | IDE's
-        `,
-      }} />
-      
-      <article className="prose">
-        <CustomMDX source={mdxContent} />
-      </article>
-
-    </section>
-);
-}

@@ -7,53 +7,6 @@ import { UrlObject } from 'url'
 import { StaticImport, PlaceholderValue, OnLoadingComplete } from 'next/dist/shared/lib/get-img-props'
 import { Content } from 'next/font/google'
 
-// markdown tables
-const parseMarkdownTable = (markdownTable: string) => {
-  if (!markdownTable) return { headers: [], rows: [] };
-
-  const lines = markdownTable.trim().split('\n');
-  if (lines.length < 2) return { headers: [], rows: [] };
-
-  const headers = lines[0].split('|').map(header => header.trim()).filter(Boolean);
-  const rows = lines.slice(2).map(line => 
-    line.split('|').map(cell => cell.trim()).filter(Boolean)
-  );
-
-  return { headers, rows };
-};
-
-let Table = ({ markdownTable }:any) => {
-  if (!markdownTable) {
-    return <div>Error: No table data provided.</div>;
-  }
-
-  const data = parseMarkdownTable(markdownTable);
-
-  if (data.headers.length === 0 || data.rows.length === 0) {
-    return <div>Error: Invalid table format.</div>;
-  }
-
-  const headers = data.headers.map((header, index) => (
-    <th key={index}>{header}</th>
-  ));
-
-  const rows = data.rows.map((row, index) => (
-    <tr key={index}>
-      {row.map((cell, cellIndex) => (
-        <td key={cellIndex}>{cell}</td>
-      ))}
-    </tr>
-  ));
-
-  return (
-    <table className='table'>
-      <thead>
-        <tr>{headers}</tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
-  );
-};
 
 // custom links
 function CustomLink(props: (React.JSX.IntrinsicAttributes & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof { href: string | UrlObject; as?: (string | UrlObject) | undefined; replace?: boolean | undefined; scroll?: boolean | undefined; shallow?: boolean | undefined; passHref?: boolean | undefined; prefetch?: boolean | undefined; locale?: string | false | undefined; legacyBehavior?: boolean | undefined; onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement> | undefined; onTouchStart?: React.TouchEventHandler<HTMLAnchorElement> | undefined; onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined }> & { href: string | UrlObject; as?: (string | UrlObject) | undefined; replace?: boolean | undefined; scroll?: boolean | undefined; shallow?: boolean | undefined; passHref?: boolean | undefined; prefetch?: boolean | undefined; locale?: string | false | undefined; legacyBehavior?: boolean | undefined; onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement> | undefined; onTouchStart?: React.TouchEventHandler<HTMLAnchorElement> | undefined; onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined } & { children?: React.ReactNode } & React.RefAttributes<HTMLAnchorElement>) | (React.JSX.IntrinsicAttributes & React.ClassAttributes<HTMLAnchorElement> & React.AnchorHTMLAttributes<HTMLAnchorElement>)) {
@@ -122,23 +75,96 @@ function createHeading(level: number) {
   return Heading
 }
 
-// card component
-const Card = ({ cardContent = {} }:any) => {
-  const { title, description, imageUrl } = cardContent;
+// markdown tables
+const parseMarkdownTable = (markdownTable: string) => {
+  if (!markdownTable) return { headers: [], rows: [] };
+
+  const lines = markdownTable.trim().split('\n');
+  if (lines.length < 2) return { headers: [], rows: [] };
+
+  const headers = lines[0].split('|').map(header => header.trim()).filter(Boolean);
+  const rows = lines.slice(2).map(line => 
+    line.split('|').map(cell => cell.trim()).filter(Boolean)
+  );
+
+  return { headers, rows };
+};
+
+export const Table = ({ markdownTable }:any) => {
+  if (!markdownTable) {
+    return <div>Error: No table data provided.</div>;
+  }
+
+  const data = parseMarkdownTable(markdownTable);
+
+  if (data.headers.length === 0 || data.rows.length === 0) {
+    return <div>Error: Invalid table format.</div>;
+  }
+
+  const headers = data.headers.map((header, index) => (
+    <th key={index}>{header}</th>
+  ));
+
+  const rows = data.rows.map((row, index) => (
+    <tr key={index}>
+      {row.map((cell, cellIndex) => (
+        <td key={cellIndex}>{cell}</td>
+      ))}
+    </tr>
+  ));
 
   return (
-    <div className="card">
+    <table className='table'>
+      <thead>
+        <tr>{headers}</tr>
+      </thead>
+      <tbody>{rows}</tbody>
+    </table>
+  );
+};
+
+// card component
+export const Card = ({ cardContent = {} }:any) => {
+  const { title, imageUrl , link, description} = cardContent;
+    /** Title: String
+   *  imageURL: String -> large size
+   *  link: String -> to destination
+   *  description: String
+  */
+
+  return (
+    <Link className="card" href={link ?? "/projects"}>
       {imageUrl && <img src={imageUrl} alt={title || 'Card Image'} className="prose card-image" />}
       <div className="card-content">
-        {title && <h2 className="card-title">{title}</h2>}
-        {description && <p className="card-text">{description}</p>}
+        {<p className="card-title">{title}</p>}
+        {description && <p className="card-text truncate-text">{description}</p>}
+        <text className='read-more'>Read More</text>
       </div>
-    </div>
+      
+    </Link>
+  );
+};
+
+export const SmallCard = ({ cardContent = {} }:any) => {
+  const { title, imageUrl , link} = cardContent;
+  /** Title: String
+   *  imageURL: String -> icon size
+   *  link: String -> to destination
+  */
+
+  return (
+    <Link className="card" href={link ?? "/projects"}>
+      {imageUrl && <img src={imageUrl} alt={title || 'Card Image'} className="prose card-image" />}
+      <div className="card-content">
+        {<p className="card-title">{title}</p>}
+      </div>
+      
+    </Link>
   );
 };
 
 // banner component
-const Banner = ({ BannerContent = {} }:any) => {
+export const Banner = ({ BannerContent = {} }:any) => {
   const { text, imageUrl } = BannerContent;
 
   return (
@@ -161,7 +187,8 @@ export let components = {
   h4: createHeading(4),
   h5: createHeading(5),
   h6: createHeading(6),
-
+  Link: Link,
+  
   /// Add other custom components here
   // within mdx
   Image: RoundedImage,
@@ -171,6 +198,7 @@ export let components = {
   Table: Table,
   Card: Card,
   Banner: Banner,
+  
 }
 
 export function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemoteProps) {
@@ -181,3 +209,4 @@ export function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemoteProps)
     />
   )
 }
+

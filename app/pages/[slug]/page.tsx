@@ -21,7 +21,7 @@ export function generateMetadata({ params }: any) {
     title,
     publishedAt: publishedTime,
     summary: description,
-    image: image,
+    image:image,
   } = page.metadata
   let ogImage = image ? image : `${baseUrl}/og?title=${encodeURIComponent(title)}`
 
@@ -33,7 +33,7 @@ export function generateMetadata({ params }: any) {
       description,
       type: 'article',
       publishedTime,
-      url: `${baseUrl}/projects/${page.slug}`,
+      url: `${baseUrl}/pages/${page.slug}`,
       images: [
         {
           url: ogImage,
@@ -85,9 +85,9 @@ export default function Page({ params }: any) {
         {page.metadata.title}
       </p>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+        {/* <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(page.metadata.publishedAt)}
-        </p>
+        </p> */}
       </div>
       <article className="prose">
         <CustomMDX source={page.content} />
