@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { formatDate, getPages } from './utils'
 import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from 'react'
+import { PagesRootDirectory } from './sitemap'
 
 export async function Pages() {
   let allPages = await getPages()
@@ -20,7 +21,7 @@ export async function Pages() {
           <Link
             key={post.slug}
             className="flex flex-col space-y-1 mb-4"
-            href={`/pages/${post.slug}`}
+            href={`/${PagesRootDirectory}/${post.slug}`}
           >
             <div className="w-full flex flex-col md:flex-row space-x-0 md:space-x-2">
             <p className="mdx-title">

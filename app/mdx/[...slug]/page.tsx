@@ -7,14 +7,16 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 export async function generateStaticParams() {
   let pages = await getPages()
 
-  return pages.map((page: { slug: any }) => ({
-    slug: page.slug,
+  return pages.map((page: any) => ({
+    slug: page.slug.split('/'),
   }))
 }
 
 export async function generateMetadata({ params }: any) {
+  const slug = Array.isArray(params.slug) ? params.slug.join('/') : params.slug;
   let pages = await getPages()
-  let page = pages.find((page: { slug: any }) => page.slug === params.slug)
+  let page = pages.find((page: any) => page.slug === slug)
+  
   if (!page) {
     return {}
   }
@@ -51,10 +53,22 @@ export async function generateMetadata({ params }: any) {
   }
 }
 
+export async function getStaticPaths() {
+  const paths = await generateStaticParams();
+
+  return {
+    paths: paths.map(({ slug }:any) => ({
+      params: { slug: slug },
+    })),
+    fallback: false, // or true or 'blocking' depending on fallback strategy
+  };
+}
+
 
 export default async function Page({ params }: any) {
+  const slug = Array.isArray(params.slug) ? params.slug.join('/') : params.slug;
   let pages = await getPages()
-  let page = pages.find((page: { slug: any }) => page.slug === params.slug)
+  let page = pages.find((page: any) => page.slug === slug)
 
   // 404 PAGE NOT FOUND 
   if (!page) {

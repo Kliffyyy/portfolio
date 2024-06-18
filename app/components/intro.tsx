@@ -1,5 +1,5 @@
 import Link from "next/link"
-import Page from "../pages/page"
+import Page from "../mdx/page"
 import { CustomMDX } from "./mdx"
 
 export default function Introduction() {
