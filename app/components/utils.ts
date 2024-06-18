@@ -69,11 +69,25 @@ async function getAllFilePathsRecursively(dir:any, fileType:any) {
   return filePaths;
 }
 
-export async function getPages() {
-  const rootDir = `app/${PagesRootDirectory}`;
-  // const rootDir = path.join(process.cwd(), 'app', 'pages', 'pages');
+export interface Page {
+  metadata: {
+    title: string;
+    publishedAt: string;
+    summary?: string;
+    image?: string;
+  };
+  slug: string;
+  content: string;
+}
 
-  // Check if the directory exists
+export interface Folder {
+  folder: string;
+  pages: Page[];
+}
+
+export async function getPages(): Promise<Folder[]> {
+  const rootDir = `app/${PagesRootDirectory}`; // app/mdx
+
   try {
     await fs.promises.access(rootDir, fs.constants.F_OK);
   } catch (error) {
@@ -83,37 +97,48 @@ export async function getPages() {
 
   const mdxFilePaths = await getAllFilePathsRecursively(rootDir, '.mdx');
 
+  const folders: { [key: string]: Page[] }= {};
+  
   // Process the collected MDX files
   const pages = mdxFilePaths.map((filePath: any) => {
     const { metadata, content } = readMDXFile(filePath);
 
-    const dir = path.dirname(filePath);
-    const file = path.basename(filePath);
-    // const slug = path.basename(file, path.extname(file));
-
     // Calculate the slug relative to the root directory
     const relativeFilePath = path.relative(rootDir, filePath);
     const slug = relativeFilePath.replace(new RegExp(`${path.extname(filePath)}$`), ''); // Remove the file extension
+    const relativeFolderpath = path.dirname(relativeFilePath);
 
-    console.log(`
-      filepath: ${filePath} 
-      dir:      ${dir} 
-      file:     ${file}
-      slug:     ${slug}
-      relative: ${relativeFilePath}
-      `)
 
-    return {
+    // Debugging
+    // const dir = path.dirname(filePath);
+    // const file = path.basename(filePath);
+    // const slug = path.basename(file, path.extname(file));
+    // console.log(`
+    //   filepath: ${filePath} 
+    //   dir:      ${dir} 
+    //   file:     ${file}
+    //   slug:     ${slug}
+    //   relative: ${relativeFilePath}
+    //   `)
+
+    if (!folders[relativeFolderpath]) {
+      folders[relativeFolderpath] = [];
+    }
+
+    folders[relativeFolderpath].push({
       metadata,
       slug,   
       content,
-    };
+    });
   });
 
   // log all filepaths found eg. [file1, file2, subdirectory1/file1, subdirectory1/file2, ...]
   // console.log(pages.map((page:any) => page.slug));
 
-  return pages;
+  return Object.entries(folders).map(([folder, pages]) => ({
+    folder,
+    pages,
+  }));
 }
 export function formatDate(date: string, includeRelative = false) {
   let currentDate = new Date()
