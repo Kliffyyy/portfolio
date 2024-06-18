@@ -1,8 +1,8 @@
 import { Pages } from "../components/pages";
 
 export const metadata = {
-  title: 'Projects',
-  description: 'All the projects that I are significant...',
+  title: 'pages',
+  description: 'all .mdx pages in the project',
 }
 
 export default function Page() {

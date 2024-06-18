@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 import { CustomMDX } from '../../components/mdx'
 import { formatDate, getPages } from '../../components/utils'
 import { baseUrl, PagesRootDirectory } from '../../components/sitemap'
-import { GetStaticPaths, GetStaticProps } from 'next'
 
 export async function generateStaticParams() {
   let pages = await getPages()
@@ -53,16 +52,16 @@ export async function generateMetadata({ params }: any) {
   }
 }
 
-export async function getStaticPaths() {
-  const paths = await generateStaticParams();
+// export async function getStaticPaths() {
+//   const paths = await generateStaticParams();
 
-  return {
-    paths: paths.map(({ slug }:any) => ({
-      params: { slug: slug },
-    })),
-    fallback: false, // or true or 'blocking' depending on fallback strategy
-  };
-}
+//   return {
+//     paths: paths.map(({ slug }:any) => ({
+//       params: { slug: slug },
+//     })),
+//     fallback: false, // or true or 'blocking' depending on fallback strategy
+//   };
+// }
 
 
 export default async function Page({ params }: any) {
