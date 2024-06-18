@@ -2,7 +2,7 @@ import { getPages } from './utils'
 
 export const baseUrl = 'https://klifton-portfolio.vercel.app/'
 
-export const PagesRootDirectory = "pages/pages"
+export const PagesRootDirectory = "pages"
 
 export default async function sitemap() {
   let getpages = await getPages()

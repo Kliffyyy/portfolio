@@ -71,27 +71,50 @@ async function getAllFilePathsRecursively(dir:any, fileType:any) {
 
 export async function getPages() {
   const rootDir = `app/${PagesRootDirectory}`;
+  // const rootDir = path.join(process.cwd(), 'app', 'pages', 'pages');
+
+  // Check if the directory exists
+  try {
+    await fs.promises.access(rootDir, fs.constants.F_OK);
+  } catch (error) {
+    console.error(`Directory does not exist: ${rootDir}`);
+    return [];
+  }
+
   const mdxFilePaths = await getAllFilePathsRecursively(rootDir, '.mdx');
 
   // Process the collected MDX files
-  const pages = mdxFilePaths.map((filePath: string) => {
+  const pages = mdxFilePaths.map((filePath: any) => {
+    const { metadata, content } = readMDXFile(filePath);
+
     const dir = path.dirname(filePath);
     const file = path.basename(filePath);
-    const { metadata, content } = readMDXFile(path.join(dir, file));
-    const slug = path.basename(file, path.extname(file));
+    // const slug = path.basename(file, path.extname(file));
+
+    // Calculate the slug relative to the root directory
+    const relativeFilePath = path.relative(rootDir, filePath);
+    const slug = relativeFilePath.replace(new RegExp(`${path.extname(filePath)}$`), ''); // Remove the file extension
+
+    console.log(`
+      filepath: ${filePath} 
+      dir:      ${dir} 
+      file:     ${file}
+      slug:     ${slug}
+      relative: ${relativeFilePath}
+      `)
 
     return {
       metadata,
-      slug,
+      slug,   
       content,
     };
   });
 
-  return pages;
-  
-  // return getMDXData(path.join(process.cwd(), 'app', `pages`, 'pages'))
-}
+  // log all filepaths found eg. [file1, file2, subdirectory1/file1, subdirectory1/file2, ...]
+  // console.log(pages.map((page:any) => page.slug));
 
+  return pages;
+}
 export function formatDate(date: string, includeRelative = false) {
   let currentDate = new Date()
   if (!date.includes('T')) {
