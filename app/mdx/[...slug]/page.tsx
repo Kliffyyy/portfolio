@@ -52,17 +52,6 @@ export async function generateMetadata({ params }: any) {
   }
 }
 
-// export async function getStaticPaths() {
-//   const paths = await generateStaticParams();
-
-//   return {
-//     paths: paths.map(({ slug }:any) => ({
-//       params: { slug: slug },
-//     })),
-//     fallback: false, // or true or 'blocking' depending on fallback strategy
-//   };
-// }
-
 
 export default async function Page({ params }: any) {
   const slug = Array.isArray(params.slug) ? params.slug.join('/') : params.slug;

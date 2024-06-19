@@ -301,7 +301,7 @@ body {
 }
 
 .small-card .title {
-  @apply text-lg font-normal tracking-wide mx-2;
+  @apply text-lg font-normal tracking-wide;
   @apply text-neutral-500 dark:text-neutral-400;
 }
 
@@ -311,7 +311,7 @@ body {
 }
 
 .icon {
-  @apply w-10 h-10 rounded-sm;
+  @apply w-8 h-8 rounded-sm;
   object-fit: cover;
   object-position: center;
   transition: all 500ms;

@@ -115,6 +115,7 @@ export async function getPages() {
 
   return pages;
 }
+
 export function formatDate(date: string, includeRelative = false) {
   let currentDate = new Date()
   if (!date.includes('T')) {
