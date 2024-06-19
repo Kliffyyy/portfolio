@@ -9,6 +9,9 @@ const mdxContent = `
 ## Projects
 
 ## Coding
+I am most comfortable with Python and SwiftUI to code out most automations and applications. I learnt C++ when I started using Arduino for more engineering related projects and React when building this website. 
+I have base knowledge of shell script to navigate in the terminal on linux based systems, mainly MacOS, and within MacOS have dabbled with applescript for automation. 
+(See Building a Personal Website, Making Mootivator, Integrated Design Challenge)
 
 ## Software
 For coding I use Visual Studio Code for creating scripts and automations. \n
@@ -73,11 +76,6 @@ export default function Home() {
         description: `
         Fusion360 | DaVinci Resolve | Git | Slicer Software's | IDE's
         `,
-      }} />
-            <SmallCard cardContent={{
-        title: "Swift",
-        imageUrl: "/documents/icons/swift.svg",
-        link: "/pages/portfolio",
       }} />
       
       <article className="prose">

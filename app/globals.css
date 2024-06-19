@@ -4,6 +4,7 @@
 
 /* --------------- CONSTRAINTS --------------- */
 html {
+  @apply text-lg;
   min-width: 360px;
   color-scheme: dark;
   transition: all 500ms;
@@ -67,7 +68,7 @@ body {
 .prose > :first-child { 
   /* Override removing top margin, causing layout shift */
   margin-top: 1.25em !important; 
-  margin-bottom: 1.25em !important;
+  /* margin-bottom: 1.25em !important; */
 }
 
 
@@ -139,31 +140,31 @@ body {
 }
 
 .prose h1 {
-  @apply text-2xl font-medium tracking-tight mt-10 mb-4;
+  @apply text-3xl font-medium tracking-tight mt-10 mb-1;
 }
 
 .prose h2 {
-  @apply text-xl font-medium tracking-tight mt-10 mb-4;
+  @apply text-2xl font-medium tracking-tight mt-8 mb-1;
 }
 
 .prose h3 {
-  @apply text-xl font-medium tracking-tight mt-10 mb-4;
+  @apply text-xl font-medium tracking-tight mt-4 mb-1;
 }
 
 .prose h4 {
-  @apply text-lg font-medium tracking-tight mt-10 mb-4;
+  @apply text-lg font-medium tracking-tight mt-2 mb-1;
 }
 
 .prose strong {
-  @apply font-medium;
+  @apply font-bold;
 }
 
 .prose ul {
-  @apply list-disc pl-6;
+  @apply list-disc pl-6 mb-2 mt-1;
 }
 
 .prose ol {
-  @apply list-decimal pl-6;
+  @apply list-decimal pl-6 mb-2 mt-1;
 }
 
 .prose .card {
