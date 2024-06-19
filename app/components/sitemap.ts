@@ -6,7 +6,7 @@ export const PagesRootDirectory = "mdx"
 
 export default async function sitemap() {
   let getpages = await getPages()
-  let pages = getpages.map((page: any) => ({
+  let pages = getpages.map((page: { slug: any; metadata: { publishedAt: any } }) => ({
     url: `${baseUrl}/${PagesRootDirectory}/${page.slug}`,
     lastModified: page.metadata.publishedAt,
   }))
