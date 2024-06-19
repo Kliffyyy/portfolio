@@ -122,6 +122,20 @@ export function formatDate(date: string, includeRelative = false) {
     date = `${date}T00:00:00`
   }
   let targetDate = new Date(date)
+  
+  if (targetDate.toString() === 'Invalid Date') {
+    return ''
+  }
+
+  let fullDate = targetDate.toLocaleString('en-us', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  })
+
+  if (!includeRelative) {
+    return fullDate
+  }
 
   let yearsAgo = currentDate.getFullYear() - targetDate.getFullYear()
   let monthsAgo = currentDate.getMonth() - targetDate.getMonth()
@@ -137,16 +151,6 @@ export function formatDate(date: string, includeRelative = false) {
     formattedDate = `${daysAgo}d ago`
   } else {
     formattedDate = 'Today'
-  }
-
-  let fullDate = targetDate.toLocaleString('en-us', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  })
-
-  if (!includeRelative) {
-    return fullDate
   }
 
   return `${fullDate} (${formattedDate})`

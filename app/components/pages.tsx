@@ -20,14 +20,14 @@ export async function Pages() {
         .map((post: { slug: Key | null | undefined; metadata: { title: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; publishedAt: string } }) => (
           <Link
             key={post.slug}
-            className="flex flex-col space-y-1 mb-4"
+            className="flex flex-col space-y-0 mb-2 mdx-link"
             href={`/${PagesRootDirectory}/${post.slug}`}
           >
-            <div className="w-full flex flex-col md:flex-row space-x-0 md:space-x-2">
-            <p className="mdx-title">
+            <div className="w-full flex flex-col md:flex-row hover:underline hover:text-gray-300">
+              <p className="mdx-title">
                 {post.metadata.title}
               </p>
-              <p className="mdx-date">
+              <p className="mdx-date no-underline">
                 {formatDate(post.metadata.publishedAt, false)}
               </p>
             </div>

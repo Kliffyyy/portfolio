@@ -330,7 +330,7 @@ body {
 }
 
 .banner-glass {
-  @apply rounded-lg py-1 px-2;
+  @apply rounded-lg py-0 px-2;
   /* blur effect */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(7px);
@@ -346,6 +346,7 @@ body {
 
 
 .banner-text {
+  @apply p-0;
   text-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.6);
   font-size: small;
   font-family: monospace;
@@ -361,17 +362,20 @@ body {
 
 /** --------------- MDX --------------- */
 .mdx-title {
-  @apply text-neutral-900 dark:text-neutral-100 tracking-tight w-full text-left;
+  @apply text-neutral-900 dark:text-neutral-100 tracking-tighter text-left w-full font-semibold;
+  -webkit-line-clamp: 1; /* Number of lines to show */
+  line-clamp: 1;
+  text-overflow: ellipsis;
+  
 }
 
 .mdx-date {
-  @apply text-neutral-600 dark:text-neutral-400 w-fit tabular-nums text-left;
+  @apply text-neutral-600 dark:text-neutral-400 tabular-nums w-fit text-left;
 }
 
-
-
 /** --------------- WHEN THE SCREEN IS LARGE --------------- */
-@media (min-width: 600px) {
+/* @media (min-width: 600px) { */
+@media (min-width: 768px) {
   .intro {
     @apply flex flex-row;
   }
@@ -419,9 +423,10 @@ body {
   }
 
   .mdx-title {
-    @apply text-neutral-900 dark:text-neutral-100 tracking-tight text-left w-full;
+    @apply text-neutral-900 dark:text-neutral-100 tracking-tight text-left w-screen;
   }
   .mdx-date {
     @apply text-right;
+    width: 30rem;
   }
 }
