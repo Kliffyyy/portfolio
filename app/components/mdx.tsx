@@ -5,7 +5,8 @@ import { highlight } from 'sugar-high'
 import React, { ReactNode } from 'react'
 import { UrlObject } from 'url'
 import { StaticImport, PlaceholderValue, OnLoadingComplete } from 'next/dist/shared/lib/get-img-props'
-import { Content } from 'next/font/google'
+import { Content, Noto_Sans_Telugu } from 'next/font/google'
+import { PassThrough } from 'stream'
 
 
 // custom links
@@ -31,10 +32,10 @@ function CustomLink(props: (React.JSX.IntrinsicAttributes & Omit<React.AnchorHTM
   return React.createElement('a', {target:"_blank" , rel: "noopener noreferrer" , ...props})
 }
 
-function RoundedImage(props: React.JSX.IntrinsicAttributes & Omit<React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "alt" | "ref" | "height" | "width" | "loading" | "src" | "srcSet"> & { src: string | StaticImport; alt: string; width?: number | `${number}` | undefined; height?: number | `${number}` | undefined; fill?: boolean | undefined; loader?: ImageLoader | undefined; quality?: number | `${number}` | undefined; priority?: boolean | undefined; loading?: "eager" | "lazy" | undefined; placeholder?: PlaceholderValue | undefined; blurDataURL?: string | undefined; unoptimized?: boolean | undefined; overrideSrc?: string | undefined; onLoadingComplete?: OnLoadingComplete | undefined; layout?: string | undefined; objectFit?: string | undefined; objectPosition?: string | undefined; lazyBoundary?: string | undefined; lazyRoot?: string | undefined } & React.RefAttributes<HTMLImageElement | null>) {
-  // return <Image alt={props.alt} className="rounded-lg" {...props} />
-  return React.createElement('Image', {className:"rounded-lg" , ...props})
-}
+// function RoundedImage(props: React.JSX.IntrinsicAttributes & Omit<React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "alt" | "ref" | "height" | "width" | "loading" | "src" | "srcSet"> & { src: string | StaticImport; alt: string; width?: number | `${number}` | undefined; height?: number | `${number}` | undefined; fill?: boolean | undefined; loader?: ImageLoader | undefined; quality?: number | `${number}` | undefined; priority?: boolean | undefined; loading?: "eager" | "lazy" | undefined; placeholder?: PlaceholderValue | undefined; blurDataURL?: string | undefined; unoptimized?: boolean | undefined; overrideSrc?: string | undefined; onLoadingComplete?: OnLoadingComplete | undefined; layout?: string | undefined; objectFit?: string | undefined; objectPosition?: string | undefined; lazyBoundary?: string | undefined; lazyRoot?: string | undefined } & React.RefAttributes<HTMLImageElement | null>) {
+//   // return <Image alt={props.alt} className="rounded-lg" {...props} />
+//   return React.createElement('Image', {className:"rounded-lg" , ...props})
+// }
 
 function Code({ children, ...props }: any) {
   let codeHTML = highlight(children)
@@ -52,9 +53,20 @@ function simplify(str: { toString: () => string }) {
     .replace(/\-\-+/g, '-') // Replace multiple - with single -
 }
 
+// import React from 'react'
+
+// export default function mdx() {
+//   return (
+//     <div >mdx</div>
+//   )
+// }
+
+
 function createHeading(level: number) {
   const Heading = ({ children }: any) => {
-    let slug = simplify(children)
+    // add random number to slug to avoid duplicate ids
+    // Uint8Array only allows 256 custom-links per page
+    let slug = `${simplify(children)}-${crypto.getRandomValues(new Uint8Array(1))}`
 
     return (React.createElement(
       `h${level}`,
@@ -178,6 +190,23 @@ export const Banner = ({ BannerContent = {} }:any) => {
   );
 };
 
+// image component
+export const RoundedImage = ({ ImageContent = {} }:any) => {
+  const { text, imageUrl } = ImageContent;
+
+  return (
+    <div className="image">
+      <img src={imageUrl} alt={text ?? 'Banner Image'} className="img"/>
+      <div className="banner-glass">
+        {<div className="banner-text">
+          {text}
+        </div> ?? ""}
+      </div>
+    </div>
+  );
+};
+
+
 
 export let components = {
   h1: createHeading(1),
@@ -190,14 +219,13 @@ export let components = {
   
   /// Add other custom components here
   // within mdx
-  Image: RoundedImage,
   a: CustomLink,
   code: Code,
   // call with <element />
   Table: Table,
   Card: Card,
   Banner: Banner,
-  
+  Image: RoundedImage,
 }
 
 export function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemoteProps) {

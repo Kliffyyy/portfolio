@@ -3,3 +3,205 @@ title: 'VEX Robotics'
 publishedAt: ''
 summary: ''
 ---
+
+VEX is an arm under [Robotics@ Apex](/mdx/areas/robotics/robotics-at-apex) in SST. \
+In my two years in VEX robotics, I have joined the 
+[2022-2023 Spin Up](https://www.hktechchallenge.com/pdf/VRC-SpinUp-GameManual-eng.pdf) season and the 
+[2023-2024 Over Under](https://content.vexrobotics.com/docs/23-24/vrc-overunder/VRC-Manual-2023-24-4.0.pdf) season.
+
+# About VEX Robotics
+In VEX robotics, I participated under the VRC category where we used the V5 system and were limited to:
+- 18" x 18" x 18" robot
+- 8 motors
+- limited expansion of bot parts. 
+
+The game is played on a 12' x 12' field with walls on all 4 sides. \
+*(dimensions are in imperial because VEX is an American based competition)
+
+## Gameplay
+- VEX is played in a 2v2 format where each team (alliance) has 2 robots on the field. 
+- The game is played in a 15 second autonomous period followed by a 1 minute 45 second driver controlled period.
+- In the last 30 seconds of the game, there are ways to obtain bonus points which vary across competitions. 
+- There is also a subsection of VEX called VEX Skills where teams compete to get the highest score in a 1 minute autonomous period and a 1 minute driver controlled period.
+
+---
+
+# 2022-2023 Spin Up
+
+The Spin Up season was my first time participating in VEX robotics. \
+I was a fresh trainee and had to learn everything from scratch ...and to be honest I didn't do much during the season, I was too scared that I would mess up the robot. 
+This wasn't helped by the fact that this was the first VEX competition that our school was participating in after a 3 year break and the pandemic.
+All 5 members of the team were new to VEX and we each had our own struggles.
+
+
+## Game Overview
+At the simplest level, Spin Up requires a robot that can pick up discs and shoot them into a goal. 
+
+<Image ImageContent={{
+    text: "Disc Dimensions",
+    imageUrl: "/documents/images/VEX/spin-up/yellow-spin-up-disc.png"
+}} />
+
+<Image ImageContent={{
+    text: "Spin Up Playfield",
+    imageUrl: "/documents/images/VEX/spin-up/spin-up.png"
+}} />
+
+The two alliances (red and blue) on opposite sides of the field have to shoot discs into their respecive goals. 
+
+In Spin Up there are multiple ways to score points:
+- shoot discs into the high scoring zone (5 points)
+- push discs into the low scoring zone (1 points)
+- Rotate rollers at the edges of the field to score points (10 points)
+- Endgame robot expansion (3 points for each tile covered)
+- Autonomous Period bonus (10 points)
+
+
+## Robot Design
+The robot was a simple 4 wheel drive with a single motor flywheel shooter and single motor intake array. 
+
+### Planning
+<Image ImageContent={{
+    text: "Spin Up Robot Planning",
+    imageUrl: "/documents/images/VEX/spin-up/spin-up-planning.jpg"
+}} />
+This image shows a picture taken during the planning phase of the robot.
+It was a sketch on where we wanted the flywheel and the structure we needed to build it.
+
+### Testing
+
+#### Intake Array
+<video src="/documents/images/VEX/spin-up/spin-up-intake-fail.mp4" muted autoPlay playsInline controls loop preload="metadata"/>
+Testing the intake subsystem of the robot. \
+It didn't work as intended, the discs kept getting stuck in the intake array.
+
+#### Flywheel
+<video src="/documents/images/VEX/spin-up/spin-up-outtake-test.mp4" muted autoPlay playsInline controls loop preload="metadata"/>
+Testing the outtake subsystem of the robot. \
+The flywheel worked, however, it took a long time to Spin Up and reduced cycle time. 
+
+#### Final Robot
+<Image ImageContent={{
+    text: "Flywheel Testing",
+    imageUrl: "/documents/images/VEX/spin-up/spin-up-testing.jpeg"
+}} />
+Shoutout to Zachary, my teammate who built the flywheel.
+
+<Image ImageContent={{
+    text: "Final Robot",
+    imageUrl: "/documents/images/VEX/spin-up/spin-up-robot.jpg"
+}} />
+
+
+## Reflections
+During the final competition, we did not fare too well. \
+Our robot was not able to shoot the discs into the goal and we were not able to score many points.
+
+
+However, looking at all the other robots, I realised that we were not the only ones who struggled. 
+We were able to learn from the winners and see what we could improve on for the next season 
+as well as made new friends from other schools and strengthen the VEX community in Singapore. 
+
+---
+
+
+# 2023-2024 Over Under
+The Over Under season was my second time participating in VEX robotics. \
+This time I was more confident in my abilities and took on a more active role in the team.
+As I became the ExCo of the club and entered Secondary 3, I had to juggle between my responsibilities and competitions.
+This season was also the first time that our school had 4 teams participating in VEX robotics. 
+
+My group was made up of 5 members, 4 of which were my juniors whom I had the pleasure of working with for a year. 
+Seeing them grow as we shared highs and lows pulls at my heartstrings.
+
+I am proud of the work we did and the bot we built together. 
+
+
+<Image ImageContent={{
+    text: "VEX Team",
+    imageUrl: "/documents/images/VEX/over-under/over-under-vex-team.jpeg"
+}} />
+Humans (left to right): \
+Klifton (me), Jian An, Ying Xuan, Jayden, Kevin
+
+## Game Overview
+Over Under is a game where robots have to pick up triangular shaped balls (triballs) and place them in goals.
+<Image ImageContent={{
+    text: "Triball Dimensions",
+    imageUrl: "/documents/images/VEX/over-under/green-triball.png"
+}} />
+
+<Image ImageContent={{
+    text: "Over Under Playfield",
+    imageUrl: "/documents/images/VEX/over-under/over-under.png"
+}} />
+
+Of the 60 Triballs Availible, 12 of which are on the field. \
+The two alliances (red and blue) on opposite sides of the field have to shove the triballs into their respective goals.
+
+In Over Under there are multiple ways to score points:
+- Triballs in goals (5 points)
+- Triballs on your side of the field (2 points)
+- Endgame robot hang on pipes \
+(20 points for highest elevation, decreasing in 5 points for each elevation level)
+- Autonomous Period bonus (8 points)
+
+## Robot Design
+
+### Planning
+
+This time... we planned... On paper and not in a span of 30 seconds. \
+This is a sketch of our robot and ideas for a catapult and intake array.
+Of course this was just an idea and not much of it was implemented in the final robot design.
+<Image ImageContent={{
+    text: "Over Under Planning",
+    imageUrl: "/documents/images/VEX/over-under/over-under-planning.jpeg"
+}} />
+One thing we could improve is that after sketching the robot, 
+we should make a 3D CAD model of it to see how parts work together and if there are any interferences.
+
+### Testing
+
+#### Intake Array
+<video src="/documents/images/VEX/over-under/intake.mp4" muted autoPlay playsInline controls loop preload="metadata"/>
+This video showcases the intake capabilities of the robot, it was able to pick up the triballs and store them in the robot. 
+Although we didn't manage to get it working 100% of the time, it was deemed good enough for match.
+
+#### Catapult
+This was an early build of our catapult — or flatapult depending on how you look at it — that was able to shoot the triballs near the goal.
+<video src="/documents/images/VEX/over-under/flatapult-2.mp4" muted autoPlay playsInline controls loop preload="metadata"/>
+
+#### Boat Drive
+This section is called boat drive because it gives the robot the ability to move over small obstacles.
+In this case, the robot was able to move over the middle bar. 
+<Image ImageContent={{
+    text: "VEX boat drive",
+    imageUrl: "/documents/images/VEX/over-under/boat_drive.gif"
+}} />
+
+This made it easy for the robot to move around the field and score more points.
+
+#### Final Robot
+<Image ImageContent={{
+    text: "Final bot",
+    imageUrl: "/documents/images/VEX/over-under/over-under-bot.jpeg"
+}} />
+^^^ The cutest version of our robot, we called it `Bob`. 
+
+## Skills planning
+For this season, we were calmer in approaching the game. 
+We realised that a way to score points was to focus on the skills section of the game.
+<video src="/documents/images/VEX/over-under/skills-plan.mp4" muted autoPlay playsInline controls loop preload="metadata"/>
+
+## Reflections
+After competition we realised that taking into account the 'meta' of the game is important. 
+However, we learnt that its not coming up with the 'meta' that is important, 
+its coming up with a bot that can counter the 'meta'. 
+
+
+In Over Under, our final competition didn't go as we had planned, 
+all of the members were tired and since the competition was at the beginning of the next year, 
+all of us had new roles in the next stage of our education. 
+But in the end we still tried our best, and **it was an amazing year we had competing together** .
+
+*meta: 'most effective tactics available'

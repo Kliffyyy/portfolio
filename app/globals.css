@@ -136,7 +136,7 @@ body {
 }
 
 .prose p {
-  @apply mt-2 text-neutral-800 dark:text-neutral-200;
+  @apply my-2 text-neutral-800 dark:text-neutral-200;
 }
 
 .prose h1 {
@@ -354,11 +354,33 @@ body {
 }
 .banner img {
   @apply rounded-xl;
-  max-height: 260px;
+  max-height: 40vh;
   object-fit: cover;
   box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
 }
 
+
+/** --------------- image --------------- */
+
+.image {
+  @apply banner;
+}
+
+.image img {
+  @apply rounded-xl;
+  object-fit: cover;
+  box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
+  background-color: white;
+  max-height: 90vh;
+}
+
+/** --------------- video --------------- */
+video {
+  @apply rounded-xl w-full;
+  object-fit: cover;
+  box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
+  max-height: 90vh;
+}
 
 /** --------------- MDX --------------- */
 .mdx-title {
