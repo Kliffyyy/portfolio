@@ -374,6 +374,12 @@ body {
   max-height: 90vh;
 }
 
+img {
+  @apply rounded-xl;
+  object-fit: cover;
+  box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
+}
+
 /** --------------- video --------------- */
 video {
   @apply rounded-xl w-full;

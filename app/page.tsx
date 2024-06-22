@@ -50,7 +50,7 @@ export default function Home() {
 
       <Introduction />
       <article className="prose">
-        <CustomMDX source={ "# Achievements"} />   {/* Achievements Title */}
+        <CustomMDX source={ "# Achievements \n 2× Yearly ESIS Bursary"} />   {/* Achievements Title */}
       </article>
 
       <Card cardContent={{
