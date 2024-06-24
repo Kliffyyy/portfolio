@@ -136,8 +136,8 @@ export const Table = ({ markdownTable }:any) => {
 };
 
 // card component
-export const Card = ({ cardContent = {} }:any) => {
-  const { title, imageUrl , link, description} = cardContent;
+export const Card = ({ CardContent = {} }:any) => {
+  const { text, imageUrl , link, description} = CardContent;
     /** Title: String
    *  imageURL: String -> large size
    *  link: String -> to destination
@@ -145,12 +145,12 @@ export const Card = ({ cardContent = {} }:any) => {
   */
 
   return (
-    <Link className="card" href={link ?? "/pages"}>
-      {imageUrl && <img src={imageUrl} alt={title || 'Card Image'} className="prose card-image" />}
+    <Link className="card" href={link ?? "/mdx"}>
       <div className="card-content">
-        {<p className="card-title">{title}</p>}
+      {imageUrl && <img src={imageUrl} alt={text || 'Card Image'} className="prose card-image" />}
+        {<p className="card-title">{text}</p>}
         {description && <p className="truncate-text">{description}</p>}
-        <text className='read-more'>Read More</text>
+        <text className='read-more text-sm'>Read More</text>
       </div>
     </Link >
   );
@@ -176,25 +176,33 @@ export const SmallCard = ({ cardContent = {} }:any) => {
 
 // banner component
 export const Banner = ({ BannerContent = {} }:any) => {
-  const { text, imageUrl } = BannerContent;
+  const { text, imageUrl, link } = BannerContent;
+  const html = (
+    <div className="banner">
+  <img src={imageUrl} alt={text ?? 'Banner Image'} className="img"/>
+    <div className="banner-glass">
+      {<div className="banner-text">
+        {text}
+      </div> ?? ""}
+    </div>
+  </div>
+  )
+
+  if (link == undefined || link == null || link == "") {
+    return html
+  }
 
   return (
-    <div className="banner">
-      <img src={imageUrl} alt={text ?? 'Banner Image'} className="img"/>
-      <div className="banner-glass">
-        {<div className="banner-text">
-          {text}
-        </div> ?? ""}
-      </div>
-    </div>
+    <Link href={link ?? "/mdx"}>
+      {html}
+    </Link>
   );
 };
 
 // image component
 export const RoundedImage = ({ ImageContent = {} }:any) => {
-  const { text, imageUrl } = ImageContent;
-
-  return (
+  const { text, imageUrl, link } = ImageContent;
+  const html = (
     <div className="image">
       <img src={imageUrl} alt={text ?? 'Banner Image'} className="img"/>
       <div className="banner-glass">
@@ -203,6 +211,16 @@ export const RoundedImage = ({ ImageContent = {} }:any) => {
         </div> ?? ""}
       </div>
     </div>
+  )
+
+  if (link == undefined || link == null || link == "") {
+    return html
+  }
+
+  return (
+    <Link href={link ?? "/mdx"}>
+      {html}
+    </Link>
   );
 };
 

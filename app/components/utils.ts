@@ -95,13 +95,13 @@ export async function getPages() {
     const relativeFilePath = path.relative(rootDir, filePath);
     const slug = relativeFilePath.replace(new RegExp(`${path.extname(filePath)}$`), ''); // Remove the file extension
 
-    console.log(`
-      filepath: ${filePath} 
-      dir:      ${dir} 
-      file:     ${file}
-      slug:     ${slug}
-      relative: ${relativeFilePath}
-      `)
+    // console.log(`
+    //   filepath: ${filePath} 
+    //   dir:      ${dir} 
+    //   file:     ${file}
+    //   slug:     ${slug}
+    //   relative: ${relativeFilePath}
+    //   `)
 
     return {
       metadata,

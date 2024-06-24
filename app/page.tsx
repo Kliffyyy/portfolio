@@ -1,86 +1,158 @@
-import { CustomMDX, Banner, Card, SmallCard} from "./components/mdx";
-import Introduction from "./components/intro";
+import { CustomMDX, components} from "./components/mdx";
+import { link } from "fs";
+import { imageConfigDefault } from "next/dist/shared/lib/image-config";
+import Link from "next/link";
 
-const title = `Hi, I am Klifton`;
 
-const mdxContent = `
-# What have I done?
+const Introduction = (
+    <div className="prose intro">
+      <h1 className="titles">
+        Hi, I am Klifton
+      </h1>
+      <div className="text-content">
+        <p>
+          I am a student in the
+          <Link href={`https://www.sst.edu.sg/`}>School of Science and Technology, Singapore</Link>
+          I have an interest in Science, Technology, Engineering, Art and Math (STEAM) related fields. 
+          I have been led to join many programmes with regard to these fields, learning more with each experience.
+        </p>
+        <p>
+          I like exepimenting with new things and learning from them. 
+          Any new experience is a learning opportunity for me.
+        </p>
+      </div>
+    </div>
+  )
 
-## Projects
 
-## Coding
-I am most comfortable with Python and SwiftUI to code out most automations and applications. I learnt C++ when I started using Arduino for more engineering related projects and React when building this website. 
-I have base knowledge of shell script to navigate in the terminal on linux based systems, mainly MacOS, and within MacOS have dabbled with applescript for automation. 
-(See Building a Personal Website, Making Mootivator, Integrated Design Challenge)
+const Experience = (
+  <div className="prose">
+    <components.h1>My Experience</components.h1>
+    <p>
+      I have been given many opportunities to learn and grow. 
+      Participating in competitions and workshops and 
+      having the pleasure to work with industry professionals to further my knowledge. 
+    </p>
+    <div className="flex flex-col md:flex-row md:space-x-2">
+    <components.Card CardContent={{
+      text: "Skills",
+      imageUrl: "/documents/icons/books.png",
+      link: "/mdx/pages/skills",
+      description: "The skills that I have picked up over the years."
+    }} />
+    <components.Card CardContent={{
+      text: "Competitions",
+      imageUrl: "/documents/icons/bullsye.png",
+      link: "/mdx/pages/competitions",
+      description: "Competitions that I have participated in"
+    }} />
+    </div>
+  </div>
+)
 
-## Software
-For coding I use Visual Studio Code for creating scripts and automations. \n
-I use XCode for developing applications native to the Apple ecosystem (Look at [Swift Accelerator Programme](https://swiftinsg.org)). 
-Arduino IDE is used for coding microcontrollers like the Arduino UNO and other related boards. (See Integrated Design Challenge)
-Apart from coding I have also used other design and media softwares. Using DaVinci Resolve to edit videos for projects. I use Figma for any UI designs and drafting up 2D designs. I am no UI/UX designer by any stretch but I do now how to use Figma to a good degree. (See Building a Peronsal Website and Making Mootivator)
-I use Fusion360 for designing and creating accurate 3D CAD models. I previously used Blender for 3D CAD due to familiarity with the controls, however I now mainly use it to render out designs made in Fusion360. (See SST × Magorium)
+const Development = (
+  <div className="prose">
+    <components.h1>Personal Development</components.h1>
+    <p>
+      I have developed many things in my life. 
+    </p>
+  </div>
+)
 
-## Hardware
-The hardware that I have interacted with and know how to use are mainly from my time the Robotics Club (See Robotics@ Apex)
-I first interacted with LEGO technic with the EV3 and Spike Prime systems. I learnt the basics of structuring a robot and managing things like centre of gravity, modular design and making robot designs structurally stable. I then moved on to VEX robotics, where constructing a robot is harder than the snap-fit pieces of lego, requiring careful planning and many hours of hard work. (See Competitions)
-In classes, I would use Arduino to power my projects to collect data from sensors. I have also used the Raspberry Pi for basic Machine Learning applications. (see Integrated Design Challenge)
-I attended a workshop by Infineon Semiconductor, and had the chance to interact with the PSoC system on chip boards. (update when the workshop is over) (See PSoC Microcontroller Workshop)
-I also have experience operating a 3D printer and some basic knowledge of operating a Laser Cutter. (See BigD Camp, Ender 3 Pro, VIVITA)
+const Future = (
+  <div className="prose">
+    <components.h1>Looking to the Future...</components.h1>
+    <p>
+      In the future, I would like to pursue manufacturing technology and create human-centric products.  
+      This is partly inspired from owning a 3D printer and my love for products that combine both function and form.
+    </p>
+    <p>
 
-# Exeprience
-## Industry
+    </p>
+  </div>
+)
 
-`;
+const Hobbies = (
+  <div className="prose">
+    <components.h1>Hobbies</components.h1>
+    <CustomMDX source={`    
+
+    `} />
+  </div>
+)
+
 
 // ![align-right](/documents/images/personal/christmas.jpeg)
  
 
 export default function Home() {
   return (
-    <section className="w-full max-w-xl px-0 md:px-0">
+    <section className="w-full max-w-xl px-0 md:px-0 prose">
 
-      <Banner BannerContent={{
+      {/* <Banner BannerContent={{
         text: "Swift Accelerator Programme",
         imageUrl: "/documents/images/SAP/empty seats.jpeg"
+      }} /> */}
+
+      {Introduction}
+      {Experience}
+
+
+      <div className="flex flex-col md:flex-row md:space-x-2">
+      <components.Card CardContent={{
+        text: "Industry Experience",
+        imageUrl: "/documents/icons/industry.png",
+        link: "/mdx/pages/industry",
+        description: "Learning and Working with Companies"
+      }} />
+      </div>
+
+
+      {Development}
+      <div className="flex flex-col md:flex-row md:space-x-2">
+      <components.Card CardContent={{
+        text: "Education",
+        imageUrl: "/documents/icons/cap.png",
+        link: "/mdx/pages/education",
+        description: ""
       }} />
 
-      <h1 className="titles">
-        {title}
-      </h1>
+      <components.Card CardContent={{
+        text: "Leadership",
+        imageUrl: "/documents/images/leader/leaderhsip-banner.png",
+        link: "/mdx/pages/leadership",
+        description: ""
+      }} /> 
+      </div>
 
-      <Introduction />
-      <article className="prose">
-        <CustomMDX source={ "# Achievements \n 2× Yearly ESIS Bursary"} />   {/* Achievements Title */}
-      </article>
+      <div className="flex flex-col md:flex-row md:space-x-2">
 
-      <Card cardContent={{
-        title: "Coding",
-        imageUrl: "/documents/images/personal/christmas.jpeg",
-        link: "/projects/Testing",
-        description: "Python | Swift | C++ | React | Shell Script | Applescript",
+      <components.Card CardContent={{
+        text: "Global Experience",
+        imageUrl: "/documents/icons/globe.png",
+        link: "/mdx/pages/global",
+        description: ""
       }} />
+      </div>
 
-      <Card cardContent={{
-        title: "Hardware",
-        imageUrl: "/documents/images/personal/christmas.jpeg",
-        link: "/projects/Testing",
-        description: `
-        Arduino | Raspberry Pi | PSoC | 3D Printing | Laser Cutting
-        `,
-      }} />
+      <components.h1>
+        Awards and Achievements
+      </components.h1>
 
-      <Card cardContent={{
-        title: "Software",
-        imageUrl: "/documents/images/personal/christmas.jpeg",
-        link: "/projects/Testing",
-        description: `
-        Fusion360 | DaVinci Resolve | Git | Slicer Software's | IDE's
-        `,
-      }} />
-      
-      <article className="prose">
-        <CustomMDX source={ "# What Have I done"} />   {/* Achievements Title */}
-      </article>
+      <div className="flex flex-col md:flex-row md:space-x-2">
+        <components.Card CardContent={{
+          text: "Awards",
+          imageUrl: "/documents/icons/trophy.png",
+          link: "/mdx/pages/awards",
+          description: "Awards from Competitions and Others"
+        }} />
+      </div>
+
+      {Future}
+
+      <CustomMDX source={"---"} />
+
+      {Hobbies}
 
     </section>
 );

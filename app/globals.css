@@ -43,6 +43,9 @@ html {
   html {
     color-scheme: dark;
   }
+  img {
+    box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
+  }
 }
 
 body {
@@ -196,6 +199,7 @@ body {
 
 .titles {
   @apply text-3xl font-semibold tracking-tighter ;
+  width: 100%;
   /* offest upwards closer to the title */
   margin-bottom: -25px;
   text-shadow: 10px 0px 25px rgba(var(white), 0.8);
@@ -232,9 +236,10 @@ body {
 
 /** --------------- CARDS --------------- */
 .card {
-  @apply flex flex-col rounded-2xl my-5 no-underline;
+  @apply rounded-2xl my-1 no-underline md:w-1/2;
   transition: all 500ms;
-  /* max-width: 450px */
+  
+  max-width: 100vh;
   /* border: 1px solid #ccc; */
   /* border-radius: 8px; */
   /* overflow: hidden; */
@@ -257,11 +262,13 @@ body {
 }
 
 .card-image {
-  @apply rounded-xl;
-  box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
-  max-height: 16em;
+  @apply rounded-xl h-auto md:h-52;
+  /* height: 13em; */
+  min-width: 100%;
+  max-height: 13rem;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
+  /* box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.05); */
   transition: all 500ms;
 }
 
@@ -278,6 +285,7 @@ body {
 }
 
 .truncate-text {
+  @apply text-base md:text-sm;
   /* For multiline truncation */
   line-clamp: 3;
   -webkit-line-clamp: 3; /* Number of lines to show */
@@ -377,7 +385,7 @@ body {
 img {
   @apply rounded-xl;
   object-fit: cover;
-  box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
+  box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.03);
 }
 
 /** --------------- video --------------- */
@@ -405,7 +413,7 @@ video {
 /* @media (min-width: 600px) { */
 @media (min-width: 768px) {
   .intro {
-    @apply flex flex-row;
+    @apply flex flex-col;
   }
 
   .prose .text-content {
@@ -424,14 +432,9 @@ video {
   
   .card-image {
     @apply mb-0 rounded-xl;
-    min-width: 35%;
-    max-height: calc(250px * 3/5);
-  }
-
-  .card:hover .card-image{
-    transform: scale(1.05);
-    transition-duration: 200ms;
-    rotate: 2deg;
+    /* min-width: 35%; */
+    width: 100vh;
+    max-height: 10rem;
   }
 
   .card-title {
@@ -441,13 +444,6 @@ video {
   .truncate-text {
     line-clamp: 8;
     -webkit-line-clamp: 8; /* Number of lines to show */
-  }
-
-  .card {
-    @apply flex-row;
-  }
-  .card-content {
-    @apply ml-5;
   }
 
   .mdx-title {
