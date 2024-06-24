@@ -11,9 +11,9 @@ const Introduction = (
       </h1>
       <div className="text-content">
         <p>
-          I am a student in the
+        <text>I am a student in the </text>
           <Link href={`https://www.sst.edu.sg/`}>School of Science and Technology, Singapore</Link>
-          I have an interest in Science, Technology, Engineering, Art and Math (STEAM) related fields. 
+          <text> I have an interest in Science, Technology, Engineering, Art and Math (STEAM) related fields. </text>
           I have been led to join many programmes with regard to these fields, learning more with each experience.
         </p>
         <p>
@@ -150,9 +150,7 @@ export default function Home() {
 
       {Future}
 
-      <CustomMDX source={"---"} />
-
-      {Hobbies}
+      {/* <CustomMDX source={"---"} /> */}
 
     </section>
 );
