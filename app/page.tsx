@@ -77,12 +77,12 @@ const Development = (
       In my education, I have held various leadership positions and have been given the opportunity to learn from different cultures overseas. 
     </p>
     <div className="flex flex-col md:flex-row md:space-x-2">
-      <components.Card CardContent={{
+      {/* <components.Card CardContent={{
         text: "Education",
         imageUrl: "/documents/icons/cap.png",
         link: "/mdx/pages/education",
         description: ""
-      }} />
+      }} /> */}
 
       <components.Card CardContent={{
         text: "Leadership",
@@ -90,9 +90,6 @@ const Development = (
         link: "/mdx/pages/leadership",
         description: ""
       }} /> 
-      </div>
-
-      <div className="flex flex-col md:flex-row md:space-x-2">
 
       <components.Card CardContent={{
         text: "Global Experience",
