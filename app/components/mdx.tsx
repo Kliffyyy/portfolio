@@ -138,40 +138,18 @@ export const Table = ({ markdownTable }:any) => {
 // card component
 export const Card = ({ CardContent = {} }:any) => {
   const { text, imageUrl , link, description} = CardContent;
-    /** Title: String
-   *  imageURL: String -> large size
-   *  link: String -> to destination
-   *  description: String
-  */
-
-  return (
+  const html = (
     <Link className="card" href={link ?? "/mdx"}>
-      <div className="card-content">
       {imageUrl && <img src={imageUrl} alt={text || 'Card Image'} className="prose card-image" />}
+      <div className="card-content">
         {<p className="card-title">{text}</p>}
         {description && <p className="truncate-text">{description}</p>}
         <text className='read-more text-sm'>Read More</text>
       </div>
     </Link >
-  );
-};
-
-export const SmallCard = ({ cardContent = {} }:any) => {
-  const { title, imageUrl , link} = cardContent;
-  /** Title: String
-   *  imageURL: String -> icon size
-   *  link: String -> to destination
-  */
-
-  return (
-    <Link className="small-card" href={link ?? "/pages"}>
-      {imageUrl && <img src={imageUrl} alt={title || 'Card Icon'} className="prose icon" />}
-      <div className="card-content">
-        {<p className="title">{title}</p>}
-      </div>
-      
-    </Link>
-  );
+  )
+  
+  return html
 };
 
 // banner component

@@ -295,29 +295,6 @@ body {
   /* max-height: calc(line-height); Adjust based on line height and number of lines */
 }
 
-.small-card {
-  @apply flex flex-row rounded-lg my-5 no-underline;
-  max-height: 4rem;
-  width:fit-content;
-  object-fit: cover;
-  transition: all 500ms;
-  align-items: center
-}
-
-.small-card:hover {
-  transition: all 300ms;
-  box-shadow: 0px 0px 25px rgba(var(--foreground-rgb), 0.1);
-}
-
-.small-card .title {
-  @apply text-lg font-normal tracking-wide;
-  @apply text-neutral-500 dark:text-neutral-400;
-}
-
-.small-card:hover .title {
-  @apply text-neutral-700 dark:text-neutral-300;
-  text-decoration: underline;
-}
 
 .icon {
   @apply w-8 h-8 rounded-sm;

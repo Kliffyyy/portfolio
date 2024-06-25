@@ -53,7 +53,7 @@ const Experience = (
     <components.Card CardContent={{
       text: "Competitions",
       imageUrl: "/documents/icons/bullsye.png",
-      link: "/mdx/pages/competitions",
+      link: "/mdx/pages/awards-competitions",
       description: "Competitions that I have participated in"
     }} />
     </div>
