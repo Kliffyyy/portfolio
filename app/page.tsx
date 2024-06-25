@@ -16,10 +16,10 @@ const Introduction = (
           <text> I have an interest in Science, Technology, Engineering, Art and Math (STEAM) related fields. </text>
           I have been led to join many programmes with regard to these fields, learning more with each experience.
         </p>
-        <p>
+        {/* <p>
           I like exepimenting with new things and learning from them. 
-          Any new experience is a learning opportunity for me.
-        </p>
+          Any new experience is a learning opportunity for me. 
+        </p> */}
       </div>
     </div>
   )
@@ -33,6 +33,16 @@ const Experience = (
       Participating in competitions and workshops and 
       having the pleasure to work with industry professionals to further my knowledge. 
     </p>
+
+    <CustomMDX source={`
+      I am currently working with [Magorium](/mdx/projects/capstone-project), a company dealing with bringing new life to plastics, 
+      to develop and improve a plastic recycling machine that uses injection moulding.
+      `}/>
+
+    <CustomMDX source={`
+      I have also taken a liking to other manufacturing techniques like [3D Printing](/mdx/areas/3d-printing/3d-printing) and acquired the [Ender 3 Pro](/mdx/areas/3d-printing/ender-3-pro) in Secondary 3 to learn and exeperiment with this manufacturing technique. 
+      Since obtaining a 3D Printer, some of my projects have benefitted from the use of highly customisable parts. 
+      `}/>
     <div className="flex flex-col md:flex-row md:space-x-2">
     <components.Card CardContent={{
       text: "Skills",
@@ -47,58 +57,8 @@ const Experience = (
       description: "Competitions that I have participated in"
     }} />
     </div>
-  </div>
-)
-
-const Development = (
-  <div className="prose">
-    <components.h1>Personal Development</components.h1>
-    <p>
-      I have developed many things in my life. 
-    </p>
-  </div>
-)
-
-const Future = (
-  <div className="prose">
-    <components.h1>Looking to the Future...</components.h1>
-    <p>
-      In the future, I would like to pursue manufacturing technology and create human-centric products.  
-      This is partly inspired from owning a 3D printer and my love for products that combine both function and form.
-    </p>
-    <p>
-
-    </p>
-  </div>
-)
-
-const Hobbies = (
-  <div className="prose">
-    <components.h1>Hobbies</components.h1>
-    <CustomMDX source={`    
-
-    `} />
-  </div>
-)
-
-
-// ![align-right](/documents/images/personal/christmas.jpeg)
- 
-
-export default function Home() {
-  return (
-    <section className="w-full max-w-xl px-0 md:px-0 prose">
-
-      {/* <Banner BannerContent={{
-        text: "Swift Accelerator Programme",
-        imageUrl: "/documents/images/SAP/empty seats.jpeg"
-      }} /> */}
-
-      {Introduction}
-      {Experience}
-
-
-      <div className="flex flex-col md:flex-row md:space-x-2">
+    
+    <div className="flex flex-col md:flex-row md:space-x-2">
       <components.Card CardContent={{
         text: "Industry Experience",
         imageUrl: "/documents/icons/industry.png",
@@ -106,10 +66,17 @@ export default function Home() {
         description: "Learning and Working with Companies"
       }} />
       </div>
+  </div>
+)
 
-
-      {Development}
-      <div className="flex flex-col md:flex-row md:space-x-2">
+const Development = (
+  <div className="prose">
+    <components.h2>Personal Development</components.h2>
+    <p>
+      As a person, I like to improve myself and believe that learning and growing is a continuous process. 
+      In my education, I have held various leadership positions and have been given the opportunity to learn from different cultures overseas. 
+    </p>
+    <div className="flex flex-col md:flex-row md:space-x-2">
       <components.Card CardContent={{
         text: "Education",
         imageUrl: "/documents/icons/cap.png",
@@ -134,10 +101,44 @@ export default function Home() {
         description: ""
       }} />
       </div>
+  </div>
+)
 
-      <components.h1>
+const Future = (
+  <div className="prose">
+    <components.h1>Looking to the Future</components.h1>
+    <p>
+      I would like to pursue manufacturing technology and create human-centric products. 
+    </p>
+    <CustomMDX source={`
+      This is partly inspired from owning a [3D Printer](/mdx/areas/3d-printing/3d-printing) and my love for products that combine both function and form.
+      `} />
+  </div>
+)
+
+const Hobbies = (
+  <div className="prose">
+    <components.h1>Hobbies</components.h1>
+    <CustomMDX source={`    
+    `} />
+  </div>
+)
+
+
+// ![align-right](/documents/images/personal/christmas.jpeg)
+ 
+
+export default function Home() {
+  return (
+    <section className="w-full max-w-xl px-0 md:px-0 prose">
+      {Introduction}
+      {Experience}
+      {Development}
+      
+
+      {/* <components.h2>
         Awards and Achievements
-      </components.h1>
+      </components.h2>
 
       <div className="flex flex-col md:flex-row md:space-x-2">
         <components.Card CardContent={{
@@ -146,11 +147,18 @@ export default function Home() {
           link: "/mdx/pages/awards",
           description: "Awards from Competitions and Others"
         }} />
-      </div>
+      </div> */}
 
       {Future}
 
-      {/* <CustomMDX source={"---"} /> */}
+      <CustomMDX source={`
+      ---
+      # Related
+      - [3D Printing](/mdx/areas/3d-printing/3d-printing)
+      - [Robotics@ Apex](/mdx/areas/robotics/robotics-at-apex)
+      - [Capstone Project](/mdx/projects/capstone-project)
+        
+      `} />
 
     </section>
 );
