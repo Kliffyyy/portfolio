@@ -40,7 +40,7 @@ const Experience = (
       `}/>
 
     <CustomMDX source={`
-      I have also taken a liking to other manufacturing techniques like [3D Printing](/mdx/areas/3d-printing/3d-printing) and acquired the [Ender 3 Pro](/mdx/areas/3d-printing/ender-3-pro) in Secondary 3 to learn and exeperiment with this manufacturing technique. 
+      I have also taken a liking to other manufacturing techniques like [3D Printing](/mdx/areas/3d-printing/3d-printing) and acquired the [Ender-3 Pro](/mdx/areas/3d-printing/ender-3-pro) in Secondary 3 to learn and exeperiment with this manufacturing technique. 
       Since obtaining a 3D Printer, some of my projects have benefitted from the use of highly customisable parts. 
       `}/>
     <div className="flex flex-col md:flex-row md:space-x-2">
@@ -107,11 +107,10 @@ const Development = (
 const Future = (
   <div className="prose">
     <components.h1>Looking to the Future</components.h1>
-    <p>
-      I would like to pursue manufacturing technology and create human-centric products. 
-    </p>
     <CustomMDX source={`
-      This is partly inspired from owning a [3D Printer](/mdx/areas/3d-printing/3d-printing) and my love for products that combine both function and form.
+    I would like to pursue manufacturing technology and create human-centric products.
+    Which led me to take up the [Capstone Project](/mdx/projects/capstone-project) with Magorium to gain more experience with Injection Moulding. \n
+    This is partly inspired from owning a [3D Printer](/mdx/areas/3d-printing/3d-printing) and my love for products that combine both function and form.
       `} />
   </div>
 )
@@ -155,8 +154,9 @@ export default function Home() {
       ---
       # Related
       - [3D Printing](/mdx/areas/3d-printing/3d-printing)
-      - [Robotics@ Apex](/mdx/areas/robotics/robotics-at-apex)
       - [Capstone Project](/mdx/projects/capstone-project)
+      - [Robotics@ Apex](/mdx/areas/robotics/robotics-at-apex)
+      - [Projects](/mdx/projects/projects)
         
       `} />
 
