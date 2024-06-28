@@ -32,11 +32,6 @@ function CustomLink(props: (React.JSX.IntrinsicAttributes & Omit<React.AnchorHTM
   return React.createElement('a', {target:"_blank" , rel: "noopener noreferrer" , ...props})
 }
 
-// function RoundedImage(props: React.JSX.IntrinsicAttributes & Omit<React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "alt" | "ref" | "height" | "width" | "loading" | "src" | "srcSet"> & { src: string | StaticImport; alt: string; width?: number | `${number}` | undefined; height?: number | `${number}` | undefined; fill?: boolean | undefined; loader?: ImageLoader | undefined; quality?: number | `${number}` | undefined; priority?: boolean | undefined; loading?: "eager" | "lazy" | undefined; placeholder?: PlaceholderValue | undefined; blurDataURL?: string | undefined; unoptimized?: boolean | undefined; overrideSrc?: string | undefined; onLoadingComplete?: OnLoadingComplete | undefined; layout?: string | undefined; objectFit?: string | undefined; objectPosition?: string | undefined; lazyBoundary?: string | undefined; lazyRoot?: string | undefined } & React.RefAttributes<HTMLImageElement | null>) {
-//   // return <Image alt={props.alt} className="rounded-lg" {...props} />
-//   return React.createElement('Image', {className:"rounded-lg" , ...props})
-// }
-
 function Code({ children, ...props }: any) {
   let codeHTML = highlight(children)
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />

@@ -1,5 +1,35 @@
 ---
 title: 'PenTracker'
 publishedAt: ''
-summary: ''
+summary: 'A Computer Vision model to track and predict the movement of a pen on a surface'
 ---
+
+# Overview
+[PenTracker](https://github.com/KaiTheRedNinja/PenTracker) is a Computer Vision model that a team of us in SST developed in 2023 to track and predict the movement of a pen on a surface. 
+
+The model uses a laptop webcam to identify the pen in the webcam's view using [Haar Cascades](https://medium.com/analytics-vidhya/haar-cascades-explained-38210e57970d). Once the pen is identified in frame, the model is able to know its exact relative position to the camera. This allowed the model to be used as in input source to the device.  
+
+The model was developed using [Python](https://www.python.org/) and [OpenCV](https://opencv.org/). 
+
+## Training
+The model was trained using a dataset of images of a pen on a surface. The images were taken from various angles and distances to ensure that the model was able to identify the pen in any position. 
+
+Once the images were taken, they were labelled as `Positive` or `Negative`, to indicate if the pen was in frame or not. The `Positive` set of images needed an extra set of highlighting the exact positioning of the pen in the frame. This was a highly tedious process as it required a lot of manual work. 
+
+
+## Usage
+
+<video src="/documents/images/pentracker/pentracker-mouse.mp4" muted autoPlay playsInline controls loop preload="metadata"/>
+
+As an experimental input source, it does not have full software support, however, if you wish to try, you may obtain the source code from the [Github](https://github.com/KaiTheRedNinja/PenTracker) repository to try this out. 
+
+## Improvements
+- Left-Handed users \
+    We realised after testing that since all the images were taken from a right handed perspective, the model was not able to identify the pen when used by a left handed user. We did not anticipate this as we had assumed that the model would be able to identify the pen regardless of the hand used. 
+
+- Err. on the side of False Negatives... \
+    What this means is that it is better for a pen to not be identified than an object that is wrongly identified as a pen. 
+
+    <video src="/documents/images/pentracker/pentracker.mp4" muted autoPlay playsInline controls loop preload="metadata"/>
+
+    As seen from the short clip, some regions were wrongly identified as the tip of the pen, this would throw off the software used to calculate the position of the pen's tip. 
