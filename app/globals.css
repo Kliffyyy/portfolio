@@ -310,6 +310,7 @@ body {
   @apply flex flex-col rounded-xl my-3;
   transition: all 300ms;
   position: relative;  /* Ensures child elements are positioned relative to this container */
+  background-color: white;
   /* border-radius: 8px; */
   /* font-family: Arial, sans-serif; */
 }
